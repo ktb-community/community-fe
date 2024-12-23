@@ -1,3 +1,4 @@
 .gitignore
 .prettierrc
 README.md
+.env
