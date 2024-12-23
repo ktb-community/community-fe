@@ -2,7 +2,14 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn install
-ADD . .
+
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
+
+ARG VITE_BASE_URL
+ENV VITE_BASE_URL=$VITE_BASE_URL
+
+COPY . .
 RUN yarn build
 
 FROM nginx:latest
