@@ -41,8 +41,8 @@ const BoardListFeature = () => {
   return (
     <div>
       <div className="flex flex-col gap-6">
-        {data?.pages.map((page) =>
-          page?.data.map((board) => <BoardCard key={board.boardId} board={board} />),
+        {data?.pages?.map((page) =>
+          page?.data?.map((board) => <BoardCard key={board.boardId} board={board} />),
         )}
       </div>
       <div ref={observerRef} className="h-10"></div>
