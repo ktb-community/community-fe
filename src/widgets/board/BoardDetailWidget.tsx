@@ -1,11 +1,12 @@
-import BoardDetailFeature from '@/features/board/detail/BoardDetailFeature.tsx';
+import { useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { getBoardComments } from '@/entities/board/api.ts';
-import { useEffect, useRef } from 'react';
-import BoardCommentCard from '@/features/board/detail/ui/BoardCommentCard.tsx';
+import { countBoardView, getBoardComments } from '@/entities/board/api.ts';
 import { useAuthStore } from '@/entities/auth/model.ts';
+import BoardDetailFeature from '@/features/board/detail/BoardDetailFeature.tsx';
 import BoardLikeFeature from '@/features/board/detail/BoardLikeFeature.tsx';
+import BoardCommentFeature from '@/features/board/detail/BoardCommentFeature.tsx';
+import BoardCommentCardFeature from '@/features/board/detail/BoardCommentCardFeature.tsx';
 
 const BoardDetailWidget = () => {
   const user = useAuthStore(state => state.user);
@@ -19,8 +20,8 @@ const BoardDetailWidget = () => {
     isFetchingNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ['boardComments'],
-    queryFn: ({ pageParam }) => getBoardComments(bid, pageParam),
+    queryKey: ['board_comments', bid],
+    queryFn: async ({ pageParam }) => await getBoardComments(bid, pageParam),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.hasMore ? lastPage.nextCursor : undefined,
   });
@@ -44,18 +45,28 @@ const BoardDetailWidget = () => {
     };
   }, [hasNextPage]);
 
+  useEffect(() => {
+    countBoardView(bid);
+  }, [bid]);
+
   return (
     <div className="w-[580px]">
       <div className="border-2 rounded-2xl p-6 w-full flex flex-col gap-6">
         <BoardDetailFeature boardId={bid} />
         <BoardLikeFeature boardId={bid} userId={user!!.id} />
       </div>
-      <hr className="my-5" />
-      <div className="flex flex-col justify-center items-center gap-3 w-full">
-        {boardCommentsData?.pages?.map((page) =>
-          page?.data?.map((comment, index) => <BoardCommentCard key={index} comment={comment} userId={user!!.id} />),
-        )}
+
+      <hr className="my-12" />
+
+      <div className="w-full">
+        <BoardCommentFeature boardId={bid} userId={user!!.id} />
+        <div className="mt-12 w-full flex flex-col gap-4">
+          {boardCommentsData?.pages?.map((page) =>
+            page?.data?.map((comment, index) => <BoardCommentCardFeature key={index} comment={comment} userId={user!!.id} boardId={bid} />),
+          )}
+        </div>
       </div>
+
       <div ref={observerRef} className="h-10"></div>
       {isFetchingNextPage && <p>Loading more...</p>}
     </div>
