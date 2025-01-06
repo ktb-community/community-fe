@@ -29,10 +29,10 @@ const HeaderWidget = () => {
               tabIndex={0}
               className="menu menu-md dropdown-content bg-base-100 rounded-box z-[1] w-[150px] py-4 shadow">
               <li>
-                <button>회원정보</button>
+                <button onClick={() => navigate('/users/edit')}>회원정보</button>
               </li>
               <li>
-                <button>비밀번호수정</button>
+                <button onClick={() => navigate('/users/edit/password')}>비밀번호수정</button>
               </li>
               <li>
                 <button onClick={handleLogout}>Logout</button>

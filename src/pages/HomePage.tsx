@@ -1,5 +1,4 @@
 import HeaderWidget from '@/widgets/common/HeaderWidget.tsx';
-import FooterWidget from '@/widgets/common/FooterWidget.tsx';
 import DarkModeWidget from '@/widgets/common/DarkModeWidget.tsx';
 import BoardListWidget from '@/widgets/home/BoardListWidget.tsx';
 import Button from '@/shared/ui/button/Button.tsx';
@@ -15,7 +14,6 @@ const HomePage = () => {
       <div className={`flex flex-col gap-16 ${isAuthenticated ? '' : 'blur-[2px] pointer-events-none'}`}>
         <HeaderWidget />
         <BoardListWidget />
-        <FooterWidget />
       </div>
       <DarkModeWidget className="fixed bottom-10 right-10" />
       {!isAuthenticated && (

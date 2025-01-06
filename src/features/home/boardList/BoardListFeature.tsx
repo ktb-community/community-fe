@@ -2,6 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { useEffect, useRef } from 'react';
 import { getBoardList } from '@/entities/board/api.ts';
 import BoardCard from '@/features/home/boardList/ui/BoardCard.tsx';
+import { PiEyesFill } from 'react-icons/pi';
 
 const BoardListFeature = () => {
   const observerRef = useRef<HTMLDivElement | null>(null);
@@ -38,9 +39,17 @@ const BoardListFeature = () => {
     };
   }, [hasNextPage]);
 
+  const isFirstPageEmpty = data?.pages?.[0]?.data.length === 0;
+
   return (
     <div>
       <div className="flex flex-col gap-6">
+        {isFirstPageEmpty && !isFetchingNextPage && (
+          <div className="flex flex-col justify-center items-center mt-[106px] h-max">
+            <p className="font-semibold text-xl">아직 등록된 게시글이 없어요</p>
+            <p className="text-4xl"><PiEyesFill /></p>
+          </div>
+        )}
         {data?.pages?.map((page) =>
           page?.data?.map((board) => <BoardCard key={board.boardId} board={board} />),
         )}
