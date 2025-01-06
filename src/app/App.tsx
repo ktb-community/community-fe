@@ -29,8 +29,8 @@ const App = () => {
           </Route>
 
           <Route path="/boards">
-            <Route path=":boardId" element={<BoardDetailPage />} />
             <Route element={<ProtectedRoute to="/auth/login" />}>
+              <Route path=":boardId" element={<BoardDetailPage />} />
               <Route path=":boardId/edit" element={<BoardEditPage />} />
               <Route path="new" element={<BoardRegisterPage />} />
             </Route>

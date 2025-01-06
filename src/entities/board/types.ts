@@ -21,7 +21,6 @@ export interface BoardComment {
   commentId: number;
   content: string;
   createdAt: string;
-  modifiedAt: string;
   writerId: number;
   writerNickname: string;
   writerProfileImg: string;

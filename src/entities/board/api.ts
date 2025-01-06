@@ -1,7 +1,11 @@
 import { HttpStatusCode } from 'axios';
 import axiosInstance from '@/shared/config/axios.ts';
 import { ApiPageResponse, ApiResponse } from '@/shared/types/api.ts';
-import { BoardCommentsResponse, BoardDetailResponse, BoardListResponse } from '@/entities/board/types.ts';
+import {
+  BoardCommentsResponse,
+  BoardDetailResponse,
+  BoardListResponse,
+} from '@/entities/board/types.ts';
 
 export const getBoardList = async (offset: number, limit: number = 10) => {
   const res = await axiosInstance.get<ApiPageResponse<BoardListResponse>>(`/boards?limit=${limit}&offset=${offset}`);
@@ -20,3 +24,16 @@ export const getBoardComments = async (boardId: number, offset: number, limit: n
   if (res.status === HttpStatusCode.Ok) return res.data;
   throw new Error(res.data?.message || 'Unknown error');
 };
+
+export const checkBoardLike = async (boardId: number, userId: number) => {
+  const res = await axiosInstance.get<ApiResponse<boolean>>(`/boards/${boardId}/likes/${userId}`);
+  if (res.status === HttpStatusCode.Ok) return res.data;
+  throw new Error(res.data?.message || 'Unknown error');
+}
+
+export const toggleBoardLike = async (boardId: number, userId: number) => {
+  const res = await axiosInstance.post<ApiResponse<boolean>>(`/boards/${boardId}/likes/${userId}`);
+  if (res.status === HttpStatusCode.Ok) return res.data;
+  throw new Error(res.data?.message || 'Unknown error');
+}
+

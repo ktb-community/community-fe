@@ -3,6 +3,7 @@ import { ENV } from '@/shared/config/env.ts';
 import { useAuthStore } from '@/entities/auth/model.ts';
 import UserAvatar from '@/shared/ui/avatar/UserAvatar.tsx';
 import React from 'react';
+import { logout } from '@/entities/auth/api.ts';
 
 const HeaderWidget = () => {
   const navigate = useNavigate();
@@ -10,8 +11,10 @@ const HeaderWidget = () => {
 
   const handleLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    clearAuth();
-    navigate('/');
+    logout()
+      .then(() => alert("로그아웃 성공"))
+      .then(() => clearAuth())
+      .finally(() => navigate('/'));
   }
 
   return (

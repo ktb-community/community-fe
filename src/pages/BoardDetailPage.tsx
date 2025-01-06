@@ -6,7 +6,7 @@ const BoardDetailPage = () => {
   return (
     <div>
       <HeaderWidget />
-      <div className="h-screen flex flex-col items-center mt-16">
+      <div className="h-max flex flex-col items-center my-16">
         <BoardDetailWidget />
       </div>
       <FooterWidget />

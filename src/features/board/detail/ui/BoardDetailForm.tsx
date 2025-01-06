@@ -85,9 +85,6 @@ const BoardDetailForm: FC<BoardDetailFormProps> = ({ boardDetail }) => {
         <div>
           {content}
         </div>
-        <div className="flex justify-center items-center">
-          <Button name="좋아요" />
-        </div>
       </div>
     </div>
   )
