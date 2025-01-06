@@ -1,4 +1,4 @@
-const UserEdit = () => {
+const UserEditPage = () => {
   return (
     <div>
       UserEdit
@@ -6,4 +6,4 @@ const UserEdit = () => {
   );
 };
 
-export default UserEdit;
+export default UserEditPage;

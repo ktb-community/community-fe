@@ -2,6 +2,9 @@ import { Board } from '@/entities/board/types.ts';
 import { FC } from 'react';
 import { ENV } from '@/shared/config/env.ts';
 import { useNavigate } from 'react-router-dom';
+import { BiLike } from 'react-icons/bi';
+import { AiOutlineComment } from 'react-icons/ai';
+import { PiEyesBold } from 'react-icons/pi';
 
 interface BoardCardProps {
   board: Board;
@@ -26,9 +29,18 @@ const BoardCard: FC<BoardCardProps> = ({ board }) => {
 
         <div className="flex flex-row justify-between items-center">
           <div className="text-[12px] flex flex-row gap-2 items-center justify-center text-gray-400">
-            <span>좋아요 {likeCnt}</span>
-            <span>조회수 {viewCnt}</span>
-            <span>댓글 {commentCnt}</span>
+            <div className="flex flex-row items-center justify-center gap-1">
+              <span><PiEyesBold /></span>
+              <span>{viewCnt}</span>
+            </div>
+            <div className="flex flex-row items-center justify-center gap-1">
+              <span><BiLike /></span>
+              <span>{likeCnt}</span>
+            </div>
+            <div className="flex flex-row items-center justify-center gap-1">
+              <span><AiOutlineComment /></span>
+              <span>{commentCnt}</span>
+            </div>
           </div>
           <div className="text-[12px] mt-[3px] text-gray-400 dark:text-gray-400">
             <span>{createdAt}</span>
@@ -38,7 +50,7 @@ const BoardCard: FC<BoardCardProps> = ({ board }) => {
         <hr className="my-3 border-2" />
 
         <div className="flex items-center">
-          <img className="w-10 h-10 rounded-full mr-4" src={`${ENV.BASE_URL}/uploads/${writerProfileImg}`} alt="" />
+          <img className="w-10 h-10 rounded-full mr-4" src={`${ENV.STORAGE_URL}/${writerProfileImg}`} alt="" />
           <div className="text-sm">
             <p className="text-gray-900 leading-none text-[16px] font-semibold">{writerNickname}</p>
           </div>

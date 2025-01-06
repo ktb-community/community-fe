@@ -2,7 +2,7 @@ import BoardAddFeature from '@/features/board/add/BoardAddFeature.tsx';
 import HeaderWidget from '@/widgets/common/HeaderWidget.tsx';
 import FooterWidget from '@/widgets/common/FooterWidget.tsx';
 
-const RegisterBoard = () => {
+const BoardRegisterPage = () => {
   return (
     <div>
       <HeaderWidget />
@@ -12,4 +12,4 @@ const RegisterBoard = () => {
   )
 }
 
-export default RegisterBoard;
+export default BoardRegisterPage;

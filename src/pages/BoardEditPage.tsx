@@ -1,4 +1,4 @@
-const EditBoard = () => {
+const BoardEditPage = () => {
 
 
   return (
@@ -8,4 +8,4 @@ const EditBoard = () => {
   );
 };
 
-export default EditBoard;
+export default BoardEditPage;

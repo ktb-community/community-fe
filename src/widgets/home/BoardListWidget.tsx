@@ -11,7 +11,7 @@ const BoardListWidget = () => {
         <p>안녕하세요.</p>
         <p>아무말 대잔치 <span className="font-bold">게시판</span> 입니다.</p>
       </div>
-      <div className="flex flex-col items-end justify-center">
+      <div className="flex flex-col items-end justify-center gap-4">
         <Button
           name="게시글 추가"
           onClick={() => navigate('/boards/new')}/>

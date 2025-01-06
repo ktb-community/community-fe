@@ -1,4 +1,4 @@
-const UserEditPassword = () => {
+const UserPasswordEditPage = () => {
   return (
     <div>
       UserEditPassword
@@ -6,4 +6,4 @@ const UserEditPassword = () => {
   );
 };
 
-export default UserEditPassword;
+export default UserPasswordEditPage;

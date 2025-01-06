@@ -21,7 +21,7 @@ const HeaderWidget = () => {
           <div className="dropdown dropdown-hover dropdown-bottom">
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
               <UserAvatar
-                src={`${ENV.BASE_URL}/uploads/${user.profile}`}
+                src={`${ENV.STORAGE_URL}/${user.profile}`}
                 size="48px"
               />
             </div>
