@@ -9,7 +9,7 @@ const BoardDetailFeature = () => {
   const { boardId } = useParams();
   const bid = parseInt(boardId as string);
 
-  const { isPending: isBoardDetailPending, isError: isBoardDetailError, data: boardDetailData } = useQuery({
+  const { isPending: isBoardDetailPending, data: boardDetailData } = useQuery({
     queryKey: ['board_detail', boardId],
     queryFn: async () => await getBoard(bid),
     enabled: !!bid,
