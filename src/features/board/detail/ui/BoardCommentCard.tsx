@@ -1,4 +1,8 @@
-import { BoardComment, BoardDeleteRequest, BoardModifyRequest } from '@/entities/board/types.ts';
+import {
+  BoardComment,
+  BoardCommentDeleteRequest,
+  BoardCommentModifyRequest,
+} from '@/entities/board/types.ts';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import UserAvatar from '@/shared/ui/avatar/UserAvatar.tsx';
 import { ENV } from '@/shared/config/env.ts';
@@ -9,8 +13,8 @@ interface BoardCommentCardProps {
   comment: BoardComment;
   userId: number;
   boardId: number;
-  handleModifyComment: (boardModifyRequest: BoardModifyRequest) => void;
-  handleDeleteComment: (boardDeleteRequest: BoardDeleteRequest) => void;
+  handleModifyComment: (boardCommentModifyRequest: BoardCommentModifyRequest) => void;
+  handleDeleteComment: (boardCommentDeleteRequest: BoardCommentDeleteRequest) => void;
 }
 
 const BoardCommentCard: FC<BoardCommentCardProps> = ({

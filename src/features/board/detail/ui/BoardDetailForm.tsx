@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { BoardDetailResponse } from '@/entities/board/types.ts';
+import { BoardDeleteRequest, BoardDetailResponse } from '@/entities/board/types.ts';
 import { PiEyesBold } from 'react-icons/pi';
 import { BiLike } from 'react-icons/bi';
 import { AiOutlineComment } from 'react-icons/ai';
@@ -8,12 +8,14 @@ import { ENV } from '@/shared/config/env.ts';
 import { useAuthStore } from '@/entities/auth/model.ts';
 import Button from '@/shared/ui/button/Button.tsx';
 import { useNavigate } from 'react-router-dom';
+import DeleteModal from '@/shared/ui/modal/DeleteModal.tsx';
 
 interface BoardDetailFormProps {
-  boardDetail: BoardDetailResponse
+  boardDetail: BoardDetailResponse,
+  handleBoardDelete: (boardDeleteRequest: BoardDeleteRequest) => void
 }
 
-const BoardDetailForm: FC<BoardDetailFormProps> = ({ boardDetail }) => {
+const BoardDetailForm: FC<BoardDetailFormProps> = ({ boardDetail, handleBoardDelete: _handleBoardDelete }) => {
   const user = useAuthStore(state => state.user);
   const navigate = useNavigate();
 
@@ -28,13 +30,31 @@ const BoardDetailForm: FC<BoardDetailFormProps> = ({ boardDetail }) => {
     writerProfileImg,
     viewCnt,
     commentCnt,
-    likeCnt
+    likeCnt,
   } = boardDetail;
 
-  const handleBoardDelete = () => {}
+  const modalId = `delete-board-${boardId}`;
+
+  const handleModalOpen = () => {
+    const modalElement = document.getElementById(modalId) as HTMLElement & { showModal: () => void };
+    if (modalElement && modalElement.showModal) {
+      modalElement.showModal();
+    }
+  };
+
+  const handleBoardDelete = () => {
+    const params = { userId: user!!.id, boardId: boardId };
+    _handleBoardDelete(params);
+  };
 
   return (
     <div>
+      <DeleteModal
+        modalId={modalId}
+        modalTitle="정말로 삭제하시겠습니까?"
+        modalText="삭제한 게시글은 다시 복구할 수 없습니다."
+        onDelete={handleBoardDelete}
+      />
       <div className="flex flex-col gap-2">
         <div className="flex flex-row justify-between items-center">
           <div>
@@ -44,7 +64,11 @@ const BoardDetailForm: FC<BoardDetailFormProps> = ({ boardDetail }) => {
             {user?.id === parseInt(writerId) && (
               <div className="flex flex-row gap-2">
                 <Button name="수정" className="btn-sm" onClick={() => navigate(`/boards/${boardId}/edit`)} />
-                <Button name="삭제" className="btn-sm bg-gray-700 border-none hover:bg-gray-400 text-white" onClick={handleBoardDelete}/>
+                <Button
+                  name="삭제"
+                  className="btn-sm bg-gray-700 border-none hover:bg-gray-400 text-white"
+                  onClick={handleModalOpen}
+                />
               </div>
             )}
           </div>
@@ -67,7 +91,7 @@ const BoardDetailForm: FC<BoardDetailFormProps> = ({ boardDetail }) => {
 
         <div className="flex flex-row justify-between items-center my-2">
           <div className="flex flex-row gap-2 items-center">
-            <UserAvatar src={`${ENV.STORAGE_URL}/${writerProfileImg}`} size={"36px"} />
+            <UserAvatar src={`${ENV.STORAGE_URL}/${writerProfileImg}`} size={'36px'} />
             <p className="font-semibold">{writerNickname}</p>
           </div>
           <div>
@@ -87,7 +111,7 @@ const BoardDetailForm: FC<BoardDetailFormProps> = ({ boardDetail }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default BoardDetailForm;

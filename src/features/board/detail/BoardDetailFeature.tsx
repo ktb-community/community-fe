@@ -1,18 +1,37 @@
-import { useQuery } from '@tanstack/react-query';
-import { getBoard } from '@/entities/board/api.ts';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { deleteBoard, getBoard } from '@/entities/board/api.ts';
 import BoardDetailForm from '@/features/board/detail/ui/BoardDetailForm.tsx';
 import { FC } from 'react';
+import { BoardDeleteRequest } from '@/entities/board/types.ts';
+import { useNavigate } from 'react-router-dom';
 
 interface BoardDetailFeatureProps {
   boardId: number;
 }
 
 const BoardDetailFeature: FC<BoardDetailFeatureProps> = ({ boardId }) => {
+  const navigate = useNavigate();
+
   const { isPending: isBoardDetailPending, data: boardDetailData } = useQuery({
     queryKey: ['board_detail', boardId],
     queryFn: async () => await getBoard(boardId),
   });
 
+  const boardDeleteMutation = useMutation({
+    mutationKey: ['board_delete', boardId],
+    mutationFn: async (boardDeleteRequest: BoardDeleteRequest) => await deleteBoard(boardDeleteRequest),
+    onSuccess: () => {
+      navigate('/');
+    },
+    onError: (err) => {
+      console.error(err);
+      alert('게시글 삭제 중 에러가 발생하였습니다.');
+    },
+  });
+
+  const handleBoardDelete = (boardDeleteRequest: BoardDeleteRequest) => {
+    boardDeleteMutation.mutate(boardDeleteRequest);
+  };
 
   if (isBoardDetailPending) {
     return <div>Loading...</div>;
@@ -20,7 +39,10 @@ const BoardDetailFeature: FC<BoardDetailFeatureProps> = ({ boardId }) => {
 
   return (
     <div>
-      <BoardDetailForm boardDetail={boardDetailData!!.data} />
+      <BoardDetailForm
+        boardDetail={boardDetailData!!.data}
+        handleBoardDelete={handleBoardDelete}
+      />
     </div>
   );
 };
