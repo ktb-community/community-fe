@@ -31,6 +31,7 @@ const LoginPage = () => {
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
+            transform: "scaleX(-1)"
           }}>
         </div>
       </div>
