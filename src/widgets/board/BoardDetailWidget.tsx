@@ -52,7 +52,7 @@ const BoardDetailWidget = () => {
 
   return (
     <div className="w-[580px]">
-      <div className="border-2 rounded-2xl p-6 w-full flex flex-col gap-6">
+      <div className="border-1 rounded-2xl p-6 w-full flex flex-col gap-6 dark:border-gray-500 shadow-uniform">
         <BoardDetailFeature boardId={bid} />
         <BoardLikeFeature boardId={bid} userId={user!!.id} />
       </div>
@@ -61,7 +61,7 @@ const BoardDetailWidget = () => {
 
       <div className="w-full">
         <BoardCommentFeature boardId={bid} userId={user!!.id} />
-        <div className="mt-12 w-full flex flex-col gap-4">
+        <div className="mt-12 w-full flex flex-col gap-6">
           {boardCommentsData?.pages?.map((page) =>
             page?.data?.map((comment, index) => <BoardCommentCardFeature key={index} comment={comment} userId={user!!.id} boardId={bid} />),
           )}

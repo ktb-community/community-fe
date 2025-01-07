@@ -11,7 +11,10 @@ export default {
     extend: {
       colors: {
         'dk-default': '#2c2c2c',
-        'dk-text': '#cccccc'
+        'dk-text': '#cccccc',
+      },
+      boxShadow: {
+        uniform: '0 0 7px rgba(0, 0, 0, 0.5)',
       },
     },
     screens: {
@@ -23,5 +26,5 @@ export default {
     },
   },
   plugins: [daisyui],
-  darkMode: 'media'
+  darkMode: 'media',
 };

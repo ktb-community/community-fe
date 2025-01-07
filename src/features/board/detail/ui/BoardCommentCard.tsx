@@ -51,7 +51,7 @@ const BoardCommentCard: FC<BoardCommentCardProps> = ({
   };
 
   return (
-    <div className="w-full border-2 rounded-lg p-3">
+    <div className="w-full border-2 rounded-xl p-3 shadow-uniform dark:border-dk-default">
       <DeleteModal
         modalId={modalId}
         modalTitle="정말로 삭제하시겠습니까?"

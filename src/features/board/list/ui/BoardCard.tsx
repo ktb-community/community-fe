@@ -19,8 +19,9 @@ const BoardCard: FC<BoardCardProps> = ({ board }) => {
   return (
     <div
       className="
-        w-[450px] h-fit border-2 rounded-3xl px-2 shadow-lg cursor-pointer
-        hover:shadow-2xl hover:bg-base-200 dark:hover:bg-opacity-80
+        w-[450px] h-fit border-2 rounded-3xl px-2 shadow-uniform cursor-pointer
+        hover:shadow-2xl hover:bg-base-200
+        dark:hover:bg-opacity-80 dark:border-dk-default
       "
       onClick={() => navigate(`/boards/${boardId}`)}
     >
@@ -40,7 +41,7 @@ const BoardCard: FC<BoardCardProps> = ({ board }) => {
           </div>
         </div>
 
-        <hr className="my-3 border-2 bg-dk-default" />
+        <hr className="my-3 border-1 border-gray-400" />
 
         <div className="flex items-center">
           <img className="w-10 h-10 rounded-full mr-4" src={`${ENV.STORAGE_URL}/${writerProfileImg}`} alt="" />
