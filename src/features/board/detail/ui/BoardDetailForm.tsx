@@ -9,6 +9,9 @@ import { useAuthStore } from '@/entities/auth/model.ts';
 import Button from '@/shared/ui/button/Button.tsx';
 import { useNavigate } from 'react-router-dom';
 import DeleteModal from '@/shared/ui/modal/DeleteModal.tsx';
+import IconText from '@/shared/ui/text/IconText.tsx';
+import { changeNumberExpression } from '@/shared/utils/expression.ts';
+import MultiLineText from '@/shared/ui/text/MultiLineText.tsx';
 
 interface BoardDetailFormProps {
   boardDetail: BoardDetailResponse,
@@ -75,18 +78,9 @@ const BoardDetailForm: FC<BoardDetailFormProps> = ({ boardDetail, handleBoardDel
         </div>
 
         <div className="text-[14px] flex flex-row gap-3 text-gray-400">
-          <div className="flex flex-row items-center justify-center gap-1">
-            <span><PiEyesBold /></span>
-            <span>{viewCnt}</span>
-          </div>
-          <div className="flex flex-row items-center justify-center gap-1">
-            <span><BiLike /></span>
-            <span>{likeCnt}</span>
-          </div>
-          <div className="flex flex-row items-center justify-center gap-1">
-            <span><AiOutlineComment /></span>
-            <span>{commentCnt}</span>
-          </div>
+          <IconText Icon={<PiEyesBold />} value={changeNumberExpression(viewCnt)} />
+          <IconText Icon={<BiLike />} value={changeNumberExpression(likeCnt)} />
+          <IconText Icon={<AiOutlineComment />} value={changeNumberExpression(commentCnt)} />
         </div>
 
         <div className="flex flex-row justify-between items-center my-2">
@@ -103,12 +97,8 @@ const BoardDetailForm: FC<BoardDetailFormProps> = ({ boardDetail, handleBoardDel
       <hr className="mt-3" />
 
       <div className="flex flex-col justify-center gap-3">
-        <div>
-          <img src={`${ENV.STORAGE_URL}/${boardImg}`} className="w-max" />
-        </div>
-        <div>
-          {content}
-        </div>
+        <div><img src={`${ENV.STORAGE_URL}/${boardImg}`} className="w-max" /></div>
+        <div><MultiLineText>{content}</MultiLineText></div>
       </div>
     </div>
   );

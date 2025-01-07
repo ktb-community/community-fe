@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { BiLike } from 'react-icons/bi';
 import { AiOutlineComment } from 'react-icons/ai';
 import { PiEyesBold } from 'react-icons/pi';
+import { changeNumberExpression } from '@/shared/utils/expression.ts';
+import IconText from '@/shared/ui/text/IconText.tsx';
 
 interface BoardCardProps {
   board: Board;
@@ -29,18 +31,9 @@ const BoardCard: FC<BoardCardProps> = ({ board }) => {
 
         <div className="flex flex-row justify-between items-center">
           <div className="text-[12px] flex flex-row gap-2 items-center justify-center text-gray-400">
-            <div className="flex flex-row items-center justify-center gap-1">
-              <span><PiEyesBold /></span>
-              <span>{viewCnt}</span>
-            </div>
-            <div className="flex flex-row items-center justify-center gap-1">
-              <span><BiLike /></span>
-              <span>{likeCnt}</span>
-            </div>
-            <div className="flex flex-row items-center justify-center gap-1">
-              <span><AiOutlineComment /></span>
-              <span>{commentCnt}</span>
-            </div>
+            <IconText Icon={<PiEyesBold />} value={changeNumberExpression(viewCnt)} />
+            <IconText Icon={<BiLike />} value={changeNumberExpression(likeCnt)} />
+            <IconText Icon={<AiOutlineComment />} value={changeNumberExpression(commentCnt)} />
           </div>
           <div className="text-[12px] mt-[3px] text-gray-400 dark:text-gray-400">
             <span>{createdAt}</span>

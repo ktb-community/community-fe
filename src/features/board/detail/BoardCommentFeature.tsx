@@ -2,6 +2,7 @@ import Button from '@/shared/ui/button/Button.tsx';
 import React, { FC, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addBoardComment } from '@/entities/board/api.ts';
+import TextArea from '@/shared/ui/input/TextArea.tsx';
 
 interface BoardCommentFeatureProps {
   boardId: number;
@@ -12,7 +13,7 @@ const BoardCommentFeature: FC<BoardCommentFeatureProps> = ({ boardId, userId }) 
   const queryClient = useQueryClient();
   const [comment, setComment] = useState('');
 
-  const mutation = useMutation({
+  const addCommentMutation = useMutation({
     mutationKey: ['add_comment', boardId, userId],
     mutationFn: async () => await addBoardComment(boardId, userId, comment),
     onSuccess: async () => {
@@ -26,21 +27,21 @@ const BoardCommentFeature: FC<BoardCommentFeatureProps> = ({ boardId, userId }) 
 
   const handleAddComment = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    mutation.mutate();
+    addCommentMutation.mutate();
   };
 
   return (
-    <div className="relative">
-      <form>
-        <textarea
+    <div className="w-full">
+      <form className="flex flex-row justify-between items-center">
+        <TextArea
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           placeholder="댓글을 작성해주세요."
-          className="resize-none border-2 rounded-md p-3 w-full h-[128px] text-sm"
+          className="w-[85%]"
         />
         <Button
           name="등록"
-          className="absolute right-6 bottom-6"
+          className=""
           disabled={comment === ''}
           onClick={handleAddComment}
         />

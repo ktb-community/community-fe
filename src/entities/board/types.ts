@@ -28,6 +28,12 @@ export interface BoardComment {
 
 export type BoardCommentsResponse = BoardComment[]
 
+export interface BoardAddRequest {
+  userId: number;
+  title: string;
+  content: string;
+  file: File | null;
+}
 
 export interface BoardDeleteRequest {
   boardId: number;

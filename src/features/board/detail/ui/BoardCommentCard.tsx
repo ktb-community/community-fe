@@ -1,13 +1,15 @@
+import React, { FC, useEffect, useState } from 'react';
+import { ENV } from '@/shared/config/env.ts';
+import UserAvatar from '@/shared/ui/avatar/UserAvatar.tsx';
+import DeleteModal from '@/shared/ui/modal/DeleteModal.tsx';
+import Button from '@/shared/ui/button/Button.tsx';
+import TextArea from '@/shared/ui/input/TextArea.tsx';
+import MultiLineText from '@/shared/ui/text/MultiLineText.tsx';
 import {
   BoardComment,
   BoardCommentDeleteRequest,
   BoardCommentModifyRequest,
 } from '@/entities/board/types.ts';
-import React, { FC, useEffect, useRef, useState } from 'react';
-import UserAvatar from '@/shared/ui/avatar/UserAvatar.tsx';
-import { ENV } from '@/shared/config/env.ts';
-import Button from '@/shared/ui/button/Button.tsx';
-import DeleteModal from '@/shared/ui/modal/DeleteModal.tsx';
 
 interface BoardCommentCardProps {
   comment: BoardComment;
@@ -24,18 +26,9 @@ const BoardCommentCard: FC<BoardCommentCardProps> = ({
                                                        handleModifyComment: _handleModifyComment,
                                                        handleDeleteComment: _handleDeleteComment,
                                                      }) => {
-  const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [modifyBtnClicked, setModifyBtnClicked] = useState<boolean>(false);
   const [modifyComment, setModifyComment] = useState(comment.content);
   const { content, createdAt, writerId, writerNickname, writerProfileImg, commentId } = comment;
-
-  useEffect(() => {
-    if (modifyBtnClicked && textAreaRef && textAreaRef.current) {
-      const target = textAreaRef.current;
-      target.style.height = `auto`;
-      target.style.height = `${target.scrollHeight}px`;
-    }
-  }, [modifyBtnClicked, textAreaRef]);
 
   useEffect(() => {
     setModifyComment(comment.content);
@@ -81,13 +74,12 @@ const BoardCommentCard: FC<BoardCommentCardProps> = ({
           <div className="w-[400px] min-h-fit">
             {modifyBtnClicked ?
               (
-                <textarea
-                  ref={textAreaRef}
-                  className="textarea textarea-bordered w-full resize-none overflow-y-hidden"
+                <TextArea
+                  className="w-full"
                   onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setModifyComment(e.target.value)}
                   value={modifyComment} />
               ) : (
-                <p>{content}</p>
+                <MultiLineText>{content}</MultiLineText>
               )}
           </div>
           {userId === writerId && (
