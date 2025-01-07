@@ -1,13 +1,11 @@
-import BoardAddFeature from '@/features/board/add/BoardAddFeature.tsx';
 import HeaderWidget from '@/widgets/common/HeaderWidget.tsx';
-import FooterWidget from '@/widgets/common/FooterWidget.tsx';
+import BoardAddWidget from '@/widgets/board/BoardAddWidget.tsx';
 
 const BoardRegisterPage = () => {
   return (
     <div>
       <HeaderWidget />
-      <BoardAddFeature />
-      <FooterWidget />
+      <BoardAddWidget />
     </div>
   )
 }

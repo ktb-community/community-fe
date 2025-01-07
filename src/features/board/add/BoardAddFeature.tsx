@@ -35,13 +35,13 @@ const BoardAddFeature = () => {
     formData.append('userId', userId.toString());
     formData.append('title', title);
     formData.append('content', content);
-    if (file) formData.append('file', file);
+    if (file) formData.append('boardImg', file);
 
     boardAddMutation.mutate(formData);
   };
 
   return (
-    <div className="h-screen">
+    <div className="w-[640px]">
       <BoardAddForm
         userId={user!!.id}
         onSubmit={handleBoardAdd}

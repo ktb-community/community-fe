@@ -27,7 +27,7 @@ export const addBoard = async (formData: FormData) => {
   const res = await axiosInstance.post(`/boards`, formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
-  if (res.status === HttpStatusCode.Ok) return res.data;
+  if (res.status === HttpStatusCode.Created) return res.data;
   throw new Error(res.data?.message || 'Unknown error');
 };
 
@@ -66,7 +66,7 @@ export const getBoardComments = async (boardId: number, offset: number, limit: n
 
 export const addBoardComment = async (boardId: number, userId: number, content: string) => {
   const res = await axiosInstance.post<ApiResponse<BoardComment>>(`/boards/${boardId}/comments`, { userId, content });
-  if (res.status === HttpStatusCode.Ok) return res.data;
+  if (res.status === HttpStatusCode.Created || res.status === HttpStatusCode.Ok) return res.data;
   throw new Error(res.data?.message || 'Unknown error');
 };
 

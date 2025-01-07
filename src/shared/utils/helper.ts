@@ -1,4 +1,5 @@
 import {
+  BOARD_TITLE_HELPER_TEXT,
   EMAIL_HELPER_TEXT,
   NICKNAME_HELPER_TEXT, PASSWORD_CHECK_HELPER_TEXT,
   PASSWORD_HELPER_TEXT,
@@ -35,3 +36,8 @@ export const handleNicknameHelperText = (nickname: string) => {
   if (!validateNickname(nickname)) return NICKNAME_HELPER_TEXT.TOO_LONG;
   return '';
 };
+
+export const handleBoardTitleHelperText = (boardTitle: string) => {
+  if (boardTitle.length > 26) return BOARD_TITLE_HELPER_TEXT.TOO_LONG;
+  return '';
+}
