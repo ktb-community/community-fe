@@ -7,6 +7,7 @@ import BoardDetailFeature from '@/features/board/detail/BoardDetailFeature.tsx';
 import BoardLikeFeature from '@/features/board/detail/BoardLikeFeature.tsx';
 import BoardCommentFeature from '@/features/board/detail/BoardCommentFeature.tsx';
 import BoardCommentCardFeature from '@/features/board/detail/BoardCommentCardFeature.tsx';
+import Loading from '@/shared/ui/ux/Loading.tsx';
 
 const BoardDetailWidget = () => {
   const user = useAuthStore(state => state.user);
@@ -68,7 +69,7 @@ const BoardDetailWidget = () => {
       </div>
 
       <div ref={observerRef} className="h-10"></div>
-      {isFetchingNextPage && <p>Loading more...</p>}
+      {isFetchingNextPage && <Loading />}
     </div>
   );
 };

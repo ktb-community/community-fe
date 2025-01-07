@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 import { getBoardList } from '@/entities/board/api.ts';
 import BoardCard from '@/features/home/boardList/ui/BoardCard.tsx';
 import { PiEyesFill } from 'react-icons/pi';
+import Loading from '@/shared/ui/ux/Loading.tsx';
 
 const BoardListFeature = () => {
   const observerRef = useRef<HTMLDivElement | null>(null);
@@ -55,7 +56,7 @@ const BoardListFeature = () => {
         )}
       </div>
       <div ref={observerRef} className="h-10"></div>
-      {isFetchingNextPage && <p>Loading more...</p>}
+      {isFetchingNextPage && <Loading />}
     </div>
   );
 };

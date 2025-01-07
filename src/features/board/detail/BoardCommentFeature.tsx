@@ -3,6 +3,7 @@ import React, { FC, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addBoardComment } from '@/entities/board/api.ts';
 import TextArea from '@/shared/ui/input/TextArea.tsx';
+import { useAlertStore } from '@/shared/model/alertStore.ts';
 
 interface BoardCommentFeatureProps {
   boardId: number;
@@ -11,6 +12,7 @@ interface BoardCommentFeatureProps {
 
 const BoardCommentFeature: FC<BoardCommentFeatureProps> = ({ boardId, userId }) => {
   const queryClient = useQueryClient();
+  const { showAlert } = useAlertStore();
   const [comment, setComment] = useState('');
 
   const addCommentMutation = useMutation({
@@ -18,11 +20,14 @@ const BoardCommentFeature: FC<BoardCommentFeatureProps> = ({ boardId, userId }) 
     mutationFn: async () => await addBoardComment(boardId, userId, comment),
     onSuccess: async () => {
       setComment('');
+      showAlert('댓글이 정상적으로 추가되었습니다.', 'success');
       await queryClient.invalidateQueries({
-        predicate: (query) => query.queryKey[0] === 'board_comments' && query.queryKey[1] === boardId
-      })
+        predicate: (query) => query.queryKey[0] === 'board_comments' && query.queryKey[1] === boardId,
+      });
     },
-    onError: () => alert('댓글 등록에 실패하였습니다.'),
+    onError: () => {
+      showAlert('댓글 등록에 실패하였습니다.', 'error');
+    },
   });
 
   const handleAddComment = (e: React.MouseEvent<HTMLButtonElement>) => {

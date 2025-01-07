@@ -11,11 +11,13 @@ import BoardDetailPage from '@/pages/BoardDetailPage.tsx';
 import NotFoundPage from '@/pages/NotFoundPage.tsx';
 import UserInfoEditPage from '@/pages/UserInfoEditPage.tsx';
 import UserPasswordEditPage from '@/pages/UserPasswordEditPage.tsx';
+import Alert from '@/shared/ui/ux/Alert.tsx';
 
 const App = () => {
   return (
     <DarkModeProvider>
       <BrowserRouter>
+        <Alert />
         <Routes>
           {/* 로그인 페이지 진입시 이미 인증이 되어있다면 홈으로 바로 이동 */}
           <Route element={<RedirectIfAuthenticated to="/" />}>

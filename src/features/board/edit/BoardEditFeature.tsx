@@ -4,9 +4,12 @@ import { useAuthStore } from '@/entities/auth/model.ts';
 import { getBoard, modifyBoard } from '@/entities/board/api.ts';
 import { BoardDetailResponse, BoardModifyRequest } from '@/entities/board/types.ts';
 import BoardEditForm from '@/features/board/edit/ui/BoardEditForm.tsx';
+import Loading from '@/shared/ui/ux/Loading.tsx';
+import { useAlertStore } from '@/shared/model/alertStore.ts';
 
 const BoardEditFeature = () => {
   const { user } = useAuthStore();
+  const { showAlert } = useAlertStore();
   const { boardId } = useParams();
   const navigate = useNavigate();
 
@@ -31,11 +34,12 @@ const BoardEditFeature = () => {
   });
 
   if (isLoading) {
-    return <div>로딩 중...</div>;
+    return <Loading />;
   }
 
   if (isError) {
     navigate('/');
+    showAlert('게시글 상세 정보를 가져오지 못했습니다.', 'error');
     return null;
   }
 
@@ -43,7 +47,7 @@ const BoardEditFeature = () => {
 
   // 작성자 검증
   if (user?.id !== boardDetail.writerId) {
-    alert('비정상적인 접근 시도입니다.');
+    showAlert('비정상적인 접근 시도입니다.', 'warning');
     navigate('/');
     return null;
   }
@@ -53,10 +57,11 @@ const BoardEditFeature = () => {
     mutationFn: async (boardModifyRequest: BoardModifyRequest) => await modifyBoard(boardModifyRequest),
     onSuccess: () => {
       navigate(`/boards/${bid}`);
+      showAlert('게시글이 성공적으로 수정되었습니다.', 'success');
     },
     onError: (err) => {
       console.error(err);
-      alert('게시글 수정 중 에러가 발생하였습니다.');
+      showAlert('게시글 수정 중 에러가 발생하였습니다.', 'error');
     },
   });
 

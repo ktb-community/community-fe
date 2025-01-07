@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { checkBoardLike, toggleBoardLike } from '@/entities/board/api.ts';
 import { FaRegThumbsUp } from 'react-icons/fa';
+import { useAlertStore } from '@/shared/model/alertStore.ts';
 
 interface BoardLikeFeatureProps {
   userId: number;
@@ -10,6 +11,7 @@ interface BoardLikeFeatureProps {
 
 const BoardLikeFeature: FC<BoardLikeFeatureProps> = ({ userId, boardId }) => {
   const [isLike, setIsLike] = useState<boolean>(false);
+  const { showAlert } = useAlertStore();
 
   useEffect(() => {
     checkBoardLike(boardId, userId)
@@ -19,10 +21,13 @@ const BoardLikeFeature: FC<BoardLikeFeatureProps> = ({ userId, boardId }) => {
   const mutation = useMutation({
     mutationKey: ['toggle_board_like', userId, boardId],
     mutationFn: async () => await toggleBoardLike(boardId, userId),
-    onSuccess: ({ data }) => setIsLike(data),
+    onSuccess: ({ data }) => {
+      setIsLike(data);
+      showAlert(`좋아요가 ${!isLike ? '등록' : '취소'} 되었습니다.`, 'success');
+    },
     onError: (err) => {
       console.error(err);
-      alert('예상치 못한 에러가 발생하였습니다. 다시 시도해주세요.');
+      showAlert('예상치 못한 에러가 발생하였습니다. 다시 시도해주세요.', 'error');
     },
   });
 

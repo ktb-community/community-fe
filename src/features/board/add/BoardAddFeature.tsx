@@ -5,14 +5,16 @@ import { useNavigate } from 'react-router-dom';
 import { BoardAddRequest } from '@/entities/board/types.ts';
 import { useAuthStore } from '@/entities/auth/model.ts';
 import { useEffect } from 'react';
+import { useAlertStore } from '@/shared/model/alertStore.ts';
 
 const BoardAddFeature = () => {
   const { user, isAuthenticated } = useAuthStore();
   const navigate = useNavigate();
+  const { showAlert } = useAlertStore();
 
   useEffect(() => {
     if (!isAuthenticated || !user) {
-      alert('게시글을 작성하려면 로그인이 필요합니다.');
+      showAlert('게시글을 작성하려면 로그인이 필요합니다.', 'warning');
       navigate('/auth/login');
     }
   }, [isAuthenticated, user]);
@@ -22,10 +24,11 @@ const BoardAddFeature = () => {
     mutationFn: async (formData: FormData) => await addBoard(formData),
     onSuccess: () => {
       navigate('/');
+      showAlert('게시글이 성공적으로 추가되었습니다.', 'success');
     },
     onError: (err) => {
       console.error(err);
-      alert('게시글 추가 중 예상치 못한 에러가 발생하였습니다.');
+      showAlert('게시글 추가 중 예상치 못한 에러가 발생하였습니다.', 'error');
     },
   });
 

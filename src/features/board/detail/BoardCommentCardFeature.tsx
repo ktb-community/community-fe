@@ -7,6 +7,7 @@ import {
 } from '@/entities/board/types.ts';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteBoardComment, modifyBoardComment } from '@/entities/board/api.ts';
+import { useAlertStore } from '@/shared/model/alertStore.ts';
 
 interface BoardCommentCardFeatureProps {
   userId: number;
@@ -16,6 +17,7 @@ interface BoardCommentCardFeatureProps {
 
 const BoardCommentCardFeature: FC<BoardCommentCardFeatureProps> = ({ userId, boardId, comment }) => {
   const queryClient = useQueryClient();
+  const { showAlert } = useAlertStore();
 
   const modifyCommentMutation = useMutation({
     mutationKey: ['modify_comment', boardId, comment.commentId],
@@ -24,9 +26,10 @@ const BoardCommentCardFeature: FC<BoardCommentCardFeatureProps> = ({ userId, boa
       await queryClient.invalidateQueries({
         predicate: (query) => query.queryKey[0] === 'board_comments' && query.queryKey[1] === boardId,
       });
+      showAlert('댓글이 성공적으로 수정되었습니다.', 'success');
     },
     onError: () => {
-      alert('댓글 수정에 실패하였습니다.');
+      showAlert('댓글 수정에 실패하였습니다.', 'error');
     },
   });
 
@@ -37,9 +40,10 @@ const BoardCommentCardFeature: FC<BoardCommentCardFeatureProps> = ({ userId, boa
       await queryClient.invalidateQueries({
         predicate: (query) => query.queryKey[0] === 'board_comments' && query.queryKey[1] === boardId,
       });
+      showAlert('댓글이 성공적으로 삭제되었습니다.', 'success');
     },
     onError: () => {
-      alert('댓글 삭제에 실패하였습니다.');
+      showAlert('댓글 삭제에 실패하였습니다.', 'error');
     },
   });
 
