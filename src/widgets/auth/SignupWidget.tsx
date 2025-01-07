@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 const SignupWidget = () => {
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="z-10 border-4 rounded-2xl py-6 shadow-2xl dark:border-gray-600">
+      <div className="z-10 border-4 rounded-2xl py-6 shadow-2xl dark:border-gray-700 dark:z-1">
         <div className="flex flex-col items-center mb-16">
-          <h1 className="font-bold text-3xl">SIGN-UP</h1>
-          <p>가입하고 커뮤니티에 합류하세요.</p>
+          <h1 className="font-bold text-3xl dark:text-dk-text">SIGN-UP</h1>
+          <p className="dark:text-dk-text">가입하고 커뮤니티에 합류하세요.</p>
         </div>
         <SignupFeature />
       </div>

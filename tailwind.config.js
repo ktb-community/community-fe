@@ -9,12 +9,9 @@ export default {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
-      transitionProperty: {
-        'bg': 'background-color',
-        'text': 'color'
-      },
       colors: {
-        background: '#f2f2f2',
+        'dk-default': '#2c2c2c',
+        'dk-text': '#cccccc'
       },
     },
     screens: {
@@ -26,5 +23,5 @@ export default {
     },
   },
   plugins: [daisyui],
-  darkMode: 'class'
+  darkMode: 'media'
 };

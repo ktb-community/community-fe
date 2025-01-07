@@ -11,7 +11,7 @@ const TextArea: FC<TextAreaProps> = ({ value, onChange, placeholder, className: 
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   const className = [
-    'textarea textarea-bordered resize-none overflow-y-hidden',
+    'textarea textarea-bordered resize-none overflow-y-hidden dark:bg-dk-default',
     _className
   ].join(' ');
 

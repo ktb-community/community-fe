@@ -29,7 +29,7 @@ const FileInputAvatar: FC<FileInputAvatar> = ({ onImageChange, className: _class
       <Avatar
         size="10rem"
         src={imageUrl}
-        className="hover:opacity-75"
+        className="hover:opacity-75 dark:bg-gray-700"
         style={{
           ...props.style,
           backgroundSize: 'cover',

@@ -20,13 +20,13 @@ const BoardCard: FC<BoardCardProps> = ({ board }) => {
     <div
       className="
         w-[450px] h-fit border-2 rounded-3xl px-2 shadow-lg cursor-pointer
-        hover:shadow-2xl hover:bg-base-200
+        hover:shadow-2xl hover:bg-base-200 dark:hover:bg-opacity-80
       "
       onClick={() => navigate(`/boards/${boardId}`)}
     >
       <div className="p-4 flex flex-col justify-between">
         <div>
-          <div className="text-gray-900 dark:text-gray-300 font-bold text-xl mb-2 line-clamp-1">{title}</div>
+          <div className="text-gray-900 dark:text-dk-text font-bold text-xl mb-2 line-clamp-1">{title}</div>
         </div>
 
         <div className="flex flex-row justify-between items-center">
@@ -40,12 +40,12 @@ const BoardCard: FC<BoardCardProps> = ({ board }) => {
           </div>
         </div>
 
-        <hr className="my-3 border-2" />
+        <hr className="my-3 border-2 bg-dk-default" />
 
         <div className="flex items-center">
           <img className="w-10 h-10 rounded-full mr-4" src={`${ENV.STORAGE_URL}/${writerProfileImg}`} alt="" />
           <div className="text-sm">
-            <p className="text-gray-900 leading-none text-[16px] font-semibold">{writerNickname}</p>
+            <p className="text-gray-900 leading-none text-[16px] font-semibold dark:text-dk-text">{writerNickname}</p>
           </div>
         </div>
       </div>

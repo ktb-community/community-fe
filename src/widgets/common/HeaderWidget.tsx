@@ -17,7 +17,7 @@ const HeaderWidget = () => {
   };
 
   return (
-    <div className="navbar bg-base-300 py-3">
+    <div className="navbar bg-base-300 py-3 dark:bg-dk-default dark:text-dk-text dark:border-b-2 dark:z-1 dark:border-gray-500">
       <div className="navbar-start ml-6">
         {user && (
           <div className="dropdown dropdown-hover dropdown-bottom">

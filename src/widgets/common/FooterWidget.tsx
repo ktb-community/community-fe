@@ -3,7 +3,7 @@ import { MdOutlineMailOutline } from 'react-icons/md';
 
 const FooterWidget = () => {
   return (
-    <footer className="footer footer-center border-t-2 text-gray-700 p-6">
+    <footer className="footer footer-center border-t-2 text-gray-700 p-6 dark:border-t-gray-500 dark:bg-dk-default dark:text-dk-text">
       <aside>
         <p className="font-bold">
           KakaoTech Cloud Native 2기

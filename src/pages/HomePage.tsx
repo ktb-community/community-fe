@@ -3,16 +3,18 @@ import BoardListWidget from '@/widgets/home/BoardListWidget.tsx';
 import Button from '@/shared/ui/button/Button.tsx';
 import { useAuthStore } from '@/entities/auth/model.ts';
 import { useNavigate } from 'react-router-dom';
+import FooterWidget from '@/widgets/common/FooterWidget.tsx';
 
 const HomePage = () => {
   const isAuthenticated = useAuthStore(state => state.isAuthenticated);
   const navigate = useNavigate();
 
   return (
-    <div className={`bg-gray-100 text-black overflow-x-hidden h-screen w-screen ${isAuthenticated ? '' : 'overflow-y-hidden'}`}>
+    <div className={`bg-gray-100 dark:bg-dk-default dark:text-dk-text text-black overflow-x-hidden h-screen w-screen ${isAuthenticated ? '' : 'overflow-y-hidden'}`}>
       <div className={`flex flex-col gap-16 ${isAuthenticated ? '' : 'blur-[2px] pointer-events-none'}`}>
         <HeaderWidget />
         <BoardListWidget />
+        <FooterWidget />
       </div>
       {!isAuthenticated && (
         <div>

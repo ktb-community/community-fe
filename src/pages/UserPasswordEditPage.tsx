@@ -1,6 +1,6 @@
 const UserPasswordEditPage = () => {
   return (
-    <div>
+    <div className="dark:text-dk-text dark:bg-dk-default">
       UserEditPassword
     </div>
   );
