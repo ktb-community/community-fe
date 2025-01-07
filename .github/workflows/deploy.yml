@@ -42,7 +42,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i key.pem $USER@$HOST "docker rm -f ktb-community-fe-nginx || true"
           ssh -o StrictHostKeyChecking=no -i key.pem $USER@$HOST "docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GHCR_PAT }}"
           ssh -o StrictHostKeyChecking=no -i key.pem $USER@$HOST "docker pull ghcr.io/ktb-community/ktb-community-fe-nginx:latest"
-          ssh -o StrictHostKeyChecking=no -i key.pem $USER@$HOST "docker run -d -p 443:80 -e VITE_BASE_URL=${{ secrets.VITE_BASE_URL }} -e VITE_API_URL=${{ secrets.VITE_API_URL }} -v /home/ubuntu/ssl:/etc/nginx/ssl --name ktb-community-fe-nginx --network community-monitoring_monitoring ghcr.io/ktb-community/ktb-community-fe-nginx:latest"
+          ssh -o StrictHostKeyChecking=no -i key.pem $USER@$HOST "docker run -d -p 443:80 -e VITE_BASE_URL=${{ secrets.VITE_BASE_URL }} -e VITE_API_URL=${{ secrets.VITE_API_URL }} -v /home/ubuntu/ssl:/etc/nginx/ssl --name ktb-community-fe-nginx --network ktb-community-overlay ghcr.io/ktb-community/ktb-community-fe-nginx:latest"
 
   notify:
     needs: [deploy]
