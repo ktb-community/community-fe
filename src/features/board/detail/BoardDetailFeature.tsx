@@ -12,14 +12,21 @@ interface BoardDetailFeatureProps {
 const BoardDetailFeature: FC<BoardDetailFeatureProps> = ({ boardId }) => {
   const navigate = useNavigate();
 
-  const { isPending: isBoardDetailPending, data: boardDetailData } = useQuery({
+  const { isPending: isBoardDetailPending, isError: isBoardDetailError, data: boardDetailData } = useQuery({
     queryKey: ['board_detail', boardId],
     queryFn: async () => await getBoard(boardId),
+    retry: 1
   });
+
+  if (isBoardDetailError) {
+    alert('예상치 못한 에러가 발생하였습니다.');
+    navigate('/');
+    return null;
+  }
 
   const boardDeleteMutation = useMutation({
     mutationKey: ['board_delete', boardId],
-    mutationFn: async (boardDeleteRequest: BoardDeleteRequest) => await deleteBoard(boardDeleteRequest),
+    mutationFn: (boardDeleteRequest: BoardDeleteRequest) => deleteBoard(boardDeleteRequest),
     onSuccess: () => {
       navigate('/');
     },

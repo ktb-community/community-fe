@@ -1,4 +1,4 @@
-import { HttpStatusCode } from 'axios';
+import axios, { HttpStatusCode } from 'axios';
 import axiosInstance from '@/shared/config/axios.ts';
 import { ApiPageResponse, ApiResponse } from '@/shared/types/api.ts';
 import {
@@ -8,8 +8,9 @@ import {
   BoardCommentsResponse,
   BoardDeleteRequest,
   BoardDetailResponse,
-  BoardListResponse,
+  BoardListResponse, BoardModifyRequest,
 } from '@/entities/board/types.ts';
+import { ENV } from '@/shared/config/env.ts';
 
 export const getBoardList = async (offset: number, limit: number = 10) => {
   const res = await axiosInstance.get<ApiPageResponse<BoardListResponse>>(`/boards?limit=${limit}&offset=${offset}`);
@@ -30,6 +31,15 @@ export const addBoard = async (formData: FormData) => {
   if (res.status === HttpStatusCode.Created) return res.data;
   throw new Error(res.data?.message || 'Unknown error');
 };
+
+export const modifyBoard = async (boardModifyRequest: BoardModifyRequest) => {
+  const { boardId, formData } = boardModifyRequest;
+  const res = await axiosInstance.put(`/boards/${boardId}`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+  if (res.status === HttpStatusCode.Ok) return res.data;
+  throw new Error(res.data?.message || 'Unknown error');
+}
 
 export const deleteBoard = async (boardDeleteRequest: BoardDeleteRequest) => {
   const { userId, boardId } = boardDeleteRequest;
@@ -89,3 +99,11 @@ export const deleteBoardComment = async (boardCommentDeleteRequest: BoardComment
   if (res.status === HttpStatusCode.Ok) return res.data;
   throw new Error(res.data?.message || 'Unknown error');
 };
+
+export const getBlobBoardImg = async (url: string) => {
+  const res = await axios.get(`${ENV.BASE_URL}/uploads/${url}`, {
+    responseType: 'blob'
+  });
+  if (res.status === HttpStatusCode.Ok) return res.data;
+  throw new Error(res.data?.message || 'Unknown error');
+}

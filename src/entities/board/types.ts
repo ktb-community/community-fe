@@ -14,7 +14,7 @@ export type BoardListResponse = Board[]
 export interface BoardDetailResponse extends Board {
   content: string;
   boardImg: string;
-  writerId: string;
+  writerId: number;
 }
 
 export interface BoardComment {
@@ -33,6 +33,11 @@ export interface BoardAddRequest {
   title: string;
   content: string;
   file: File | null;
+}
+
+export interface BoardModifyRequest {
+  boardId: number;
+  formData: FormData;
 }
 
 export interface BoardDeleteRequest {

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { BoardAddRequest } from '@/entities/board/types.ts';
 import Input from '@/shared/ui/input/Input.tsx';
 import HelperText from '@/shared/ui/text/HelperText.tsx';
@@ -15,6 +15,7 @@ interface BoardAddFormProps {
 const BoardAddForm: FC<BoardAddFormProps> = ({ userId, onSubmit }) => {
   const [boardTitle, setBoardTitle] = useState<string>('');
   const [boardContent, setBoardContent] = useState<string>('');
+  const [imgObjectUrl, setImgObjectUrl] = useState<string | null>(null);
   const [boardImg, setBoardImg] = useState<File | null>(null);
 
   const handleAddBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -29,8 +30,17 @@ const BoardAddForm: FC<BoardAddFormProps> = ({ userId, onSubmit }) => {
     if (files && files.length > 0) {
       const file = files[0];
       setBoardImg(file);
+      setImgObjectUrl(URL.createObjectURL(file));
     }
   };
+
+  useEffect(() => {
+    return () => {
+      if (imgObjectUrl) {
+        URL.revokeObjectURL(imgObjectUrl);
+      }
+    };
+  }, [imgObjectUrl]);
 
   return (
     <div className="flex flex-col gap-4">
@@ -53,9 +63,9 @@ const BoardAddForm: FC<BoardAddFormProps> = ({ userId, onSubmit }) => {
         />
       </div>
 
-      {boardImg && (
+      {imgObjectUrl && (
         <div>
-          <img src={URL.createObjectURL(boardImg)} className="w-[120px] h-[120px] mt-3" />
+          <img src={imgObjectUrl} className="w-[120px] h-[120px] mt-3" />
         </div>
       )}
 

@@ -64,7 +64,7 @@ const BoardDetailForm: FC<BoardDetailFormProps> = ({ boardDetail, handleBoardDel
             <h1 className="font-bold text-2xl">{title}</h1>
           </div>
           <div>
-            {user?.id === parseInt(writerId) && (
+            {user?.id === writerId && (
               <div className="flex flex-row gap-2">
                 <Button name="수정" className="btn-sm" onClick={() => navigate(`/boards/${boardId}/edit`)} />
                 <Button
@@ -97,7 +97,7 @@ const BoardDetailForm: FC<BoardDetailFormProps> = ({ boardDetail, handleBoardDel
       <hr className="mt-3" />
 
       <div className="flex flex-col justify-center gap-3">
-        <div><img src={`${ENV.STORAGE_URL}/${boardImg}`} className="w-max" /></div>
+        <div className="mt-3"><img src={`${ENV.STORAGE_URL}/${boardImg}`} className="w-max max-h-[240px]" /></div>
         <div><MultiLineText>{content}</MultiLineText></div>
       </div>
     </div>

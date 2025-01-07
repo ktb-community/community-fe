@@ -1,9 +1,11 @@
+import BoardEditWidget from '@/widgets/board/BoardEditWidget.tsx';
+import HeaderWidget from '@/widgets/common/HeaderWidget.tsx';
+
 const BoardEditPage = () => {
-
-
   return (
     <div>
-      EditBoard
+      <HeaderWidget />
+      <BoardEditWidget />
     </div>
   );
 };

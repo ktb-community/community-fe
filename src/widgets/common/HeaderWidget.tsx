@@ -12,7 +12,6 @@ const HeaderWidget = () => {
   const handleLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     logout()
-      .then(() => alert("로그아웃 성공"))
       .then(() => clearAuth())
       .finally(() => navigate('/'));
   }
