@@ -1,4 +1,4 @@
-import BoardListFeature from '@/features/home/boardList/BoardListFeature.tsx';
+import BoardListFeature from '@/features/board/list/BoardListFeature.tsx';
 import Button from '@/shared/ui/button/Button.tsx';
 import { useNavigate } from 'react-router-dom';
 

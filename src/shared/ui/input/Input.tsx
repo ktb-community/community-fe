@@ -10,7 +10,7 @@ type InputProps = ReactInputProps & {}
 
 const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const { className: _className, ...inputProps } = props
-  const className = ['w-[450px]', _className].join(' ')
+  const className = ['w-[450px] bg-white', _className].join(' ')
   return <input ref={ref} {...inputProps} className={className} />
 })
 

@@ -14,10 +14,10 @@ const HeaderWidget = () => {
     logout()
       .then(() => clearAuth())
       .finally(() => navigate('/'));
-  }
+  };
 
   return (
-    <div className="navbar bg-base-300 dark:bg-gray-700 py-3">
+    <div className="navbar bg-base-300 py-3">
       <div className="navbar-start ml-6">
         {user && (
           <div className="dropdown dropdown-hover dropdown-bottom">

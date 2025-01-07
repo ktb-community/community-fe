@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useEffect, useRef } from 'react';
 import { getBoardList } from '@/entities/board/api.ts';
-import BoardCard from '@/features/home/boardList/ui/BoardCard.tsx';
+import BoardCard from '@/features/board/list/ui/BoardCard.tsx';
 import { PiEyesFill } from 'react-icons/pi';
 import Loading from '@/shared/ui/ux/Loading.tsx';
 
@@ -15,7 +15,7 @@ const BoardListFeature = () => {
     isFetchingNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ['boardList'],
+    queryKey: ['list'],
     queryFn: ({ pageParam }) => getBoardList(pageParam, limit),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.hasMore ? lastPage.nextCursor : undefined,

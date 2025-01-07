@@ -1,5 +1,4 @@
 import HeaderWidget from '@/widgets/common/HeaderWidget.tsx';
-import DarkModeWidget from '@/widgets/common/DarkModeWidget.tsx';
 import BoardListWidget from '@/widgets/home/BoardListWidget.tsx';
 import Button from '@/shared/ui/button/Button.tsx';
 import { useAuthStore } from '@/entities/auth/model.ts';
@@ -10,12 +9,11 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className={`bg-gray-100 dark:bg-[#121212] text-black dark:text-gray-300 overflow-x-hidden h-screen w-screen ${isAuthenticated ? '' : 'overflow-y-hidden'}`}>
+    <div className={`bg-gray-100 text-black overflow-x-hidden h-screen w-screen ${isAuthenticated ? '' : 'overflow-y-hidden'}`}>
       <div className={`flex flex-col gap-16 ${isAuthenticated ? '' : 'blur-[2px] pointer-events-none'}`}>
         <HeaderWidget />
         <BoardListWidget />
       </div>
-      <DarkModeWidget className="fixed bottom-10 right-10" />
       {!isAuthenticated && (
         <div>
           {/* 배경 Blur 처리 */}
