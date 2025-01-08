@@ -49,14 +49,6 @@ const BoardLikeFeature: FC<BoardLikeFeatureProps> = ({ userId, boardId }) => {
           <p>좋아요</p>
         </div>
       </button>
-      {/**
-       <button className={btnClassName} onClick={e => handleBoardLike(e)}>
-       <div className="flex flex-col justify-center items-center gap-2">
-       <FaRegThumbsDown className="text-2xl" />
-       <p>싫어요</p>
-       </div>
-       </button>
-       */}
     </div>
   );
 };

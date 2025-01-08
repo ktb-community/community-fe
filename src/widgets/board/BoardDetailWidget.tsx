@@ -7,7 +7,6 @@ import BoardDetailFeature from '@/features/board/detail/BoardDetailFeature.tsx';
 import BoardLikeFeature from '@/features/board/detail/BoardLikeFeature.tsx';
 import BoardCommentFeature from '@/features/board/detail/BoardCommentFeature.tsx';
 import BoardCommentCardFeature from '@/features/board/detail/BoardCommentCardFeature.tsx';
-import Loading from '@/shared/ui/ux/Loading.tsx';
 
 const BoardDetailWidget = () => {
   const user = useAuthStore(state => state.user);
@@ -63,13 +62,18 @@ const BoardDetailWidget = () => {
         <BoardCommentFeature boardId={bid} userId={user!!.id} />
         <div className="mt-12 w-full flex flex-col gap-6">
           {boardCommentsData?.pages?.map((page) =>
-            page?.data?.map((comment, index) => <BoardCommentCardFeature key={index} comment={comment} userId={user!!.id} boardId={bid} />),
+            page?.data?.map((comment, index) => <BoardCommentCardFeature key={index} comment={comment}
+                                                                         userId={user!!.id} boardId={bid} />),
           )}
         </div>
       </div>
 
       <div ref={observerRef} className="h-10"></div>
-      {isFetchingNextPage && <Loading />}
+      {isFetchingNextPage && (
+        <div className="flex justify-center items-center">
+          <span className="loading loading-spinner loading-lg" />
+        </div>
+      )}
     </div>
   );
 };

@@ -10,14 +10,13 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className={`bg-gray-100 dark:bg-dk-default dark:text-dk-text text-black overflow-hidden min-w-screen flex flex-col ${isAuthenticated ? '' : 'overflow-y-hidden'}`}>
+    <div
+      className={`bg-gray-100 dark:bg-dk-default dark:text-dk-text text-black overflow-hidden min-w-screen flex flex-col ${isAuthenticated ? '' : 'overflow-y-hidden'}`}>
       <div className={`flex flex-col flex-grow gap-16 ${isAuthenticated ? '' : 'blur-[2px] pointer-events-none'}`}>
         <HeaderWidget />
         <BoardListWidget />
       </div>
-      <div className="h-16 flex items-center justify-center text-white mt-32">
-        <FooterWidget />
-      </div>
+      <FooterWidget />
       {!isAuthenticated && (
         <div>
           {/* 배경 Blur 처리 */}
@@ -30,7 +29,8 @@ const HomePage = () => {
           />
 
           {/* 로그인 메시지와 버튼 */}
-          <div className="fixed bottom-[20%] flex flex-col justify-center items-center gap-6 right-0 left-0 pointer-events-none">
+          <div
+            className="fixed bottom-[20%] flex flex-col justify-center items-center gap-6 right-0 left-0 pointer-events-none">
             <span className="font-bold text-2xl z-10 pointer-events-auto">
               로그인하고 더 다양한 서비스를 만나보세요.
             </span>
