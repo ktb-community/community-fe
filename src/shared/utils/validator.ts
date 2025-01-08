@@ -1,5 +1,5 @@
 export const validateProfileImg = (profileImg: File | null | undefined) => {
-  return profileImg && profileImg.type.startsWith("image/");
+  return !!(profileImg && profileImg.type.startsWith("image/"));
 }
 
 export const validateEmail = (email: string) => {

@@ -22,7 +22,7 @@ const useDragAndDrop = (onFileSelect: (file: File) => void) => {
 
   const setFile = (file: File | null) => {
     if (validateProfileImg(file)) {
-      onFileSelect(file);
+      onFileSelect(file as File);
     }
   };
 
