@@ -5,7 +5,7 @@ const Alert = () => {
 
   const alertClassName = [
     'alert',
-    'fixed right-24 top-24 w-fit h-fit opacity-70',
+    'fixed right-24 top-24 w-fit max-h-fit opacity-70',
     isVisible ? '' : 'hidden',
     type === 'info' ? 'alert-info' : '',
     type === 'success' ? 'alert-success' : '',

@@ -10,10 +10,12 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className={`bg-gray-100 dark:bg-dk-default dark:text-dk-text text-black overflow-x-hidden h-screen w-screen ${isAuthenticated ? '' : 'overflow-y-hidden'}`}>
-      <div className={`flex flex-col gap-16 ${isAuthenticated ? '' : 'blur-[2px] pointer-events-none'}`}>
+    <div className={`bg-gray-100 dark:bg-dk-default dark:text-dk-text text-black overflow-x-hidden min-h-screen w-screen flex flex-col ${isAuthenticated ? '' : 'overflow-y-hidden'}`}>
+      <div className={`flex flex-col flex-grow gap-16 ${isAuthenticated ? '' : 'blur-[2px] pointer-events-none'}`}>
         <HeaderWidget />
         <BoardListWidget />
+      </div>
+      <div className="h-16 flex items-center justify-center text-white">
         <FooterWidget />
       </div>
       {!isAuthenticated && (

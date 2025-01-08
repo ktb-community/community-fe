@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAuthStore } from '@/entities/auth/model.ts';
 import { getBoard, modifyBoard } from '@/entities/board/api.ts';
 import { BoardDetailResponse, BoardModifyRequest } from '@/entities/board/types.ts';
@@ -12,6 +12,7 @@ const BoardEditFeature = () => {
   const { showAlert } = useAlertStore();
   const { boardId } = useParams();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   // boardId 검증
   if (!boardId || isNaN(Number(boardId))) {
@@ -55,9 +56,12 @@ const BoardEditFeature = () => {
   const boardModifyMutation = useMutation({
     mutationKey: ['board_modify', bid],
     mutationFn: async (boardModifyRequest: BoardModifyRequest) => await modifyBoard(boardModifyRequest),
-    onSuccess: () => {
+    onSuccess: async () => {
       navigate(`/boards/${bid}`);
       showAlert('게시글이 성공적으로 수정되었습니다.', 'success');
+      await queryClient.invalidateQueries({
+        predicate: (query) => query.queryKey[0] === 'board_detail' && query.queryKey[1] === bid,
+      });
     },
     onError: (err) => {
       console.error(err);

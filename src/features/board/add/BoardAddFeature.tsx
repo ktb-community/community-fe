@@ -8,8 +8,8 @@ import { useEffect } from 'react';
 import { useAlertStore } from '@/shared/model/alertStore.ts';
 
 const BoardAddFeature = () => {
-  const { user, isAuthenticated } = useAuthStore();
   const navigate = useNavigate();
+  const { user, isAuthenticated } = useAuthStore();
   const { showAlert } = useAlertStore();
 
   useEffect(() => {
