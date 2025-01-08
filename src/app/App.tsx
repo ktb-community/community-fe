@@ -8,9 +8,9 @@ import BoardRegisterPage from '@/pages/BoardRegisterPage.tsx';
 import BoardEditPage from '@/pages/BoardEditPage.tsx';
 import BoardDetailPage from '@/pages/BoardDetailPage.tsx';
 import NotFoundPage from '@/pages/NotFoundPage.tsx';
-import UserInfoEditPage from '@/pages/UserInfoEditPage.tsx';
-import UserPasswordEditPage from '@/pages/UserPasswordEditPage.tsx';
+import UserPasswordPage from '@/pages/UserPasswordPage.tsx';
 import Alert from '@/shared/ui/ux/Alert.tsx';
+import UserMyPage from '@/pages/UserMyPage.tsx';
 
 const App = () => {
   return (
@@ -38,8 +38,8 @@ const App = () => {
 
         <Route path="/users">
           <Route element={<ProtectedRoute to="/auth/login" />}>
-            <Route path="edit" element={<UserInfoEditPage />} />
-            <Route path="edit/password" element={<UserPasswordEditPage />} />
+            <Route path=":userId/mypage" element={<UserMyPage />} />
+            <Route path=":userId/password" element={<UserPasswordPage />} />
           </Route>
         </Route>
 

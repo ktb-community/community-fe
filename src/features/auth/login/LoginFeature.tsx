@@ -19,7 +19,7 @@ const LoginFeature = () => {
     mutationFn: (loginRequest: LoginRequest) => login(loginRequest),
     onSuccess: ({ data }) => {
       setAuth(data);
-      navigate('/')
+      navigate('/');
     },
     onError: (err) => handleLoginError(err),
   });
@@ -41,14 +41,14 @@ const LoginFeature = () => {
           setTimeout(() => setPasswordFailure(false), 3000);
           break;
         default:
-          console.error("Unhandled error", err);
+          console.error('Unhandled error', err);
       }
     }
   };
 
   const handleLogin = (loginRequest: LoginRequest) => {
     mutation.mutate(loginRequest);
-  }
+  };
 
   return (
     <div>
@@ -58,7 +58,7 @@ const LoginFeature = () => {
         pendingRequest={mutation.isPending}
         onSubmit={handleLogin} />
     </div>
-  )
-}
+  );
+};
 
 export default LoginFeature;

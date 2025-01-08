@@ -1,4 +1,4 @@
-export const validateProfileImg = (profileImg: File) => {
+export const validateProfileImg = (profileImg: File | null | undefined) => {
   return profileImg && profileImg.type.startsWith("image/");
 }
 

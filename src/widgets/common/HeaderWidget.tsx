@@ -7,7 +7,7 @@ import { logout } from '@/entities/auth/api.ts';
 
 const HeaderWidget = () => {
   const navigate = useNavigate();
-  const { user, clearAuth } = useAuthStore();
+  const { user, clearAuth, isAuthenticated } = useAuthStore();
 
   const handleLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -17,7 +17,8 @@ const HeaderWidget = () => {
   };
 
   return (
-    <div className="navbar bg-base-300 py-3 dark:bg-dk-default dark:text-dk-text dark:border-b-2 dark:z-1 dark:border-gray-500">
+    <div
+      className="navbar bg-base-300 py-3 dark:bg-dk-default dark:text-dk-text dark:border-b-2 dark:z-1 dark:border-gray-500">
       <div className="navbar-start ml-6">
         {user && (
           <div className="dropdown dropdown-hover dropdown-bottom">
@@ -27,19 +28,18 @@ const HeaderWidget = () => {
                 size="48px"
               />
             </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-md dropdown-content bg-base-100 rounded-box z-[1] w-[150px] py-4 shadow">
-              <li>
-                <button onClick={() => navigate('/users/edit')}>회원정보</button>
-              </li>
-              <li>
-                <button onClick={() => navigate('/users/edit/password')}>비밀번호수정</button>
-              </li>
-              <li>
-                <button onClick={handleLogout}>Logout</button>
-              </li>
-            </ul>
+            {user && isAuthenticated && (
+              <ul
+                tabIndex={0}
+                className="menu menu-md dropdown-content bg-base-100 rounded-box z-[1] w-[150px] py-4 shadow">
+                <li>
+                  <button onClick={() => navigate(`/users/${user.id}/mypage`)}>마이페이지</button>
+                </li>
+                <li>
+                  <button onClick={handleLogout}>로그아웃</button>
+                </li>
+              </ul>
+            )}
           </div>
         )}
       </div>

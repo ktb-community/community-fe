@@ -9,7 +9,7 @@ const BoardListWidget = () => {
     <div className="flex flex-col justify-center items-center relative gap-8">
       <div className="flex flex-col items-center mb-8 text-[20px]">
         <p>안녕하세요.</p>
-        <p>아무말 대잔치 <span className="font-bold">게시판</span> 입니다.</p>
+        <p>살구는 작고 귀여운 <span className="font-bold">햄스터</span> 입니다.</p>
       </div>
       <div className="flex flex-col items-end justify-center gap-8">
         <Button

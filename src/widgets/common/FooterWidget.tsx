@@ -4,8 +4,8 @@ import { MdOutlineMailOutline } from 'react-icons/md';
 const FooterWidget = () => {
   return (
     <footer
-      className="footer footer-center border-t-2 text-gray-700 p-6 dark:border-t-gray-500 dark:bg-dk-default dark:text-dk-text">
-      <div className="flex flex-row justify-center items-center w-full gap-6">
+      className="footer footer-center border-t-2 text-gray-700 py-6 dark:border-t-gray-500 dark:bg-dk-default dark:text-dk-text">
+      <div className="flex flex-row justify-center items-center gap-6">
         <aside>
           <p className="font-bold">
             KakaoTech Cloud Native 2기

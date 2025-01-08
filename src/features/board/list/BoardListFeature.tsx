@@ -15,7 +15,7 @@ const BoardListFeature = () => {
     isFetchingNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ['list'],
+    queryKey: ['board_list'],
     queryFn: ({ pageParam }) => getBoardList(pageParam, limit),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.hasMore ? lastPage.nextCursor : undefined,

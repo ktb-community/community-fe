@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { validateProfileImg } from '@/shared/utils/validator.ts';
 
 const useDragAndDrop = (onFileSelect: (file: File) => void) => {
   const [isDragActive, setIsDragActive] = useState(false);
@@ -20,7 +21,7 @@ const useDragAndDrop = (onFileSelect: (file: File) => void) => {
   };
 
   const setFile = (file: File | null) => {
-    if (file && file.type.startsWith('image/')) {
+    if (validateProfileImg(file)) {
       onFileSelect(file);
     }
   };

@@ -3,11 +3,11 @@ import Input from '@/shared/ui/input/Input.tsx';
 import HelperText from '@/shared/ui/text/HelperText.tsx';
 
 interface NicknameInputProps {
-  id: string
+  id?: string
   label: string;
   helperText: string;
-  placeholder: string;
-  name: string;
+  placeholder?: string;
+  name?: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
