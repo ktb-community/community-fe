@@ -23,7 +23,7 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker buildx build --build-arg VITE_BASE_URL=${{ secrets.VITE_BASE_URL }} --build-arg VITE_API_URL=${{ secrets.VITE_API_URL }} --build-arg VITE_LOGO_TEXT=${{ secrets.VITE_LOGO_TEXT }} --platform linux/amd64 -t ghcr.io/ktb-community/ktb-community-fe-nginx:latest --push .
+          docker buildx build --build-arg VITE_BASE_URL=${{ secrets.VITE_BASE_URL }} --build-arg VITE_API_URL=${{ secrets.VITE_API_URL }} --build-arg VITE_STORAGE_URL=${{ secrets.VITE_STORAGE_URL }} --build-arg VITE_LOGO_TEXT=${{ secrets.VITE_LOGO_TEXT }} --platform linux/amd64 -t ghcr.io/ktb-community/ktb-community-fe-nginx:latest --push .
 
   deploy:
     needs: [build-and-push]
