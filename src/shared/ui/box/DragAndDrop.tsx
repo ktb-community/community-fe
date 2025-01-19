@@ -2,16 +2,19 @@ import React, { FC, useEffect, useRef, useState } from 'react';
 import useDragAndDrop from '@/shared/hooks/useDragAndDrop.ts';
 import { ENV } from '@/shared/config/env.ts';
 import { getBlobBoardImg } from '@/entities/board/api.ts';
+import { MEDIA_TYPE } from '@/shared/constants/const.ts';
 
 interface DragAndDropProps {
   boardImg?: string | undefined;
+  contentType: 'VIDEO' | 'IMAGE';
   selectedBoardImgName: string | undefined;
   setSelectedBoardImg: (file: File) => void;
 }
 
-const DragAndDrop: FC<DragAndDropProps> = ({ boardImg, selectedBoardImgName, setSelectedBoardImg }) => {
+const DragAndDrop: FC<DragAndDropProps> = ({ boardImg, contentType, selectedBoardImgName, setSelectedBoardImg }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [imgPreviewUrl, setImgPreviewUrl] = useState(boardImg ? `${ENV.STORAGE_URL}/${boardImg}` : null);
+  const [mediaType, setMediaType] = useState<string>(contentType);
 
   useEffect(() => {
     if (boardImg) {
@@ -31,6 +34,7 @@ const DragAndDrop: FC<DragAndDropProps> = ({ boardImg, selectedBoardImgName, set
 
   const handleSetFilePreview = (file: File) => {
     setSelectedBoardImg(file);
+    setMediaType(file.type?.startsWith('video') ? MEDIA_TYPE.VIDEO : MEDIA_TYPE.IMAGE);
     setImgPreviewUrl(URL.createObjectURL(file));
   };
 
@@ -41,6 +45,7 @@ const DragAndDrop: FC<DragAndDropProps> = ({ boardImg, selectedBoardImgName, set
     if (files) {
       const file = files[0];
       handleSetFilePreview(file);
+      setMediaType(file.type?.startsWith('video') ? MEDIA_TYPE.VIDEO : MEDIA_TYPE.IMAGE);
     }
   };
 
@@ -61,7 +66,7 @@ const DragAndDrop: FC<DragAndDropProps> = ({ boardImg, selectedBoardImgName, set
     <>
       <p className="text-sm font-bold">이미지 첨부</p>
       <div>
-        <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileInput} className="hidden" />
+        <input ref={fileInputRef} type="file" accept="image/*, video/*" onChange={handleFileInput} className="hidden" />
         <div
           className={dragContainerClassName}
           onClick={handleFileInputBoxClick}
@@ -73,7 +78,10 @@ const DragAndDrop: FC<DragAndDropProps> = ({ boardImg, selectedBoardImgName, set
           <p className="break-words text-sm w-full">{selectedBoardImgName}</p>
           {imgPreviewUrl && (
             <div>
-              <img src={imgPreviewUrl} className="w-fit h-fit max-h-[120px] mt-3" />
+              {mediaType === MEDIA_TYPE.IMAGE
+                ? <img src={imgPreviewUrl} className="w-fit h-fit max-h-[120px] mt-3" />
+                : <video src={imgPreviewUrl} autoPlay={true} muted />
+              }
             </div>
           )}
         </div>

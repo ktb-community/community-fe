@@ -14,6 +14,7 @@ export type BoardListResponse = Board[]
 export interface BoardDetailResponse extends Board {
   content: string;
   boardImg: string;
+  contentType: "VIDEO" | "IMAGE",
   writerId: number;
 }
 

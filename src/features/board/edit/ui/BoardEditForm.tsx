@@ -19,6 +19,7 @@ const BoardEditForm: FC<BoardEditFormProps> = ({ userId, boardDetail, onSubmit }
     title,
     content,
     boardImg,
+    contentType
   } = boardDetail;
 
   const [boardTitle, setBoardTitle] = useState(title);
@@ -60,6 +61,7 @@ const BoardEditForm: FC<BoardEditFormProps> = ({ userId, boardDetail, onSubmit }
       <div className="flex flex-col gap-2 mt-2">
         <DragAndDrop
           boardImg={boardImg}
+          contentType={contentType}
           selectedBoardImgName={selectedBoardImg?.name}
           setSelectedBoardImg={setSelectedBoardImg}
         />

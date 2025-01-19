@@ -6,6 +6,7 @@ import { BoardAddRequest } from '@/entities/board/types.ts';
 import { useAuthStore } from '@/entities/auth/model.ts';
 import { useEffect } from 'react';
 import { useAlertStore } from '@/shared/model/alertStore.ts';
+import Loading from '@/shared/ui/ux/Loading.tsx';
 
 const BoardAddFeature = () => {
   const navigate = useNavigate();
@@ -38,13 +39,17 @@ const BoardAddFeature = () => {
     formData.append('userId', userId.toString());
     formData.append('title', title);
     formData.append('content', content);
-    if (file) formData.append('boardImg', file);
+    if (file) {
+      formData.append('type', file.type);
+      formData.append('boardImg', file);
+    }
 
     boardAddMutation.mutate(formData);
   };
 
   return (
     <div className="w-[640px] border-2 rounded-xl py-12 px-6 shadow-uniform dark:border-dk-default dark:text-dk-text">
+      {boardAddMutation.isPending && <Loading />}
       <BoardAddForm
         userId={user!!.id}
         onSubmit={handleBoardAdd}

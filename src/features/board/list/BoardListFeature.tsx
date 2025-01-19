@@ -40,7 +40,7 @@ const BoardListFeature = () => {
     };
   }, [hasNextPage]);
 
-  const isFirstPageEmpty = data?.pages?.[0]?.data.length === 0;
+  const isFirstPageEmpty = data?.pages?.[0]?.data?.length === 0;
 
   return (
     <div>

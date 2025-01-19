@@ -12,6 +12,7 @@ import DeleteModal from '@/shared/ui/modal/DeleteModal.tsx';
 import IconText from '@/shared/ui/text/IconText.tsx';
 import { changeNumberExpression } from '@/shared/utils/expression.ts';
 import MultiLineText from '@/shared/ui/text/MultiLineText.tsx';
+import { MEDIA_TYPE } from '@/shared/constants/const.ts';
 
 interface BoardDetailFormProps {
   boardDetail: BoardDetailResponse,
@@ -25,6 +26,7 @@ const BoardDetailForm: FC<BoardDetailFormProps> = ({ boardDetail, handleBoardDel
   const {
     boardId,
     boardImg,
+    contentType,
     title,
     content,
     createdAt,
@@ -97,7 +99,12 @@ const BoardDetailForm: FC<BoardDetailFormProps> = ({ boardDetail, handleBoardDel
       <hr className="mt-3" />
 
       <div className="flex flex-col justify-center gap-3">
-        <div className="mt-3"><img src={`${ENV.STORAGE_URL}/${boardImg}`} className="w-max max-h-[240px]" /></div>
+        <div className="mt-3">
+          {contentType === MEDIA_TYPE.IMAGE
+            ? <img src={`${ENV.STORAGE_URL}/${boardImg}`} className="w-max max-h-[240px]" />
+            : <video src={`${ENV.STORAGE_URL}/${boardImg}`} autoPlay={true} controls={true} className="w-full h-[250px]" />
+          }
+        </div>
         <div><MultiLineText>{content}</MultiLineText></div>
       </div>
     </div>

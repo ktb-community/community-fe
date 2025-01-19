@@ -7,6 +7,7 @@ import Button from '@/shared/ui/button/Button.tsx';
 import { PLACEHOLDER } from '@/shared/constants/helperText.ts';
 import { handleBoardTitleHelperText } from '@/shared/utils/helper.ts';
 import DragAndDrop from '@/shared/ui/box/DragAndDrop.tsx';
+import { MEDIA_TYPE } from '@/shared/constants/const.ts';
 
 interface BoardAddFormProps {
   userId: number;
@@ -49,6 +50,7 @@ const BoardAddForm: FC<BoardAddFormProps> = ({ userId, onSubmit }) => {
       <div className="flex flex-col gap-2 mt-2">
         <DragAndDrop
           selectedBoardImgName={selectedBoardImg?.name}
+          contentType={selectedBoardImg?.type.startsWith('video') ? MEDIA_TYPE.VIDEO : MEDIA_TYPE.IMAGE}
           setSelectedBoardImg={setSelectedBoardImg}
         />
       </div>
