@@ -1,6 +1,7 @@
 import axios, { HttpStatusCode } from 'axios';
 import axiosInstance from '@/shared/config/axios.ts';
 import { ApiPageResponse, ApiResponse } from '@/shared/types/api.ts';
+import { ENV } from '@/shared/config/env.ts';
 import {
   BoardComment,
   BoardCommentDeleteRequest,
@@ -10,7 +11,6 @@ import {
   BoardDetailResponse,
   BoardListResponse, BoardModifyRequest,
 } from '@/entities/board/types.ts';
-import { ENV } from '@/shared/config/env.ts';
 
 export const getBoardList = async (offset: number, limit: number = 10) => {
   const res = await axiosInstance.get<ApiPageResponse<BoardListResponse>>(`/boards?limit=${limit}&offset=${offset}`);
@@ -101,7 +101,7 @@ export const deleteBoardComment = async (boardCommentDeleteRequest: BoardComment
 };
 
 export const getBlobBoardImg = async (url: string) => {
-  const res = await axios.get(`${ENV.BASE_URL}/uploads/${url}`, {
+  const res = await axios.get(`${ENV.STORAGE_URL}/${url}`, {
     responseType: 'blob'
   });
   if (res.status === HttpStatusCode.Ok) return res.data;

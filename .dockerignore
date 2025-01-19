@@ -1,4 +1,5 @@
 .gitignore
 .prettierrc
 README.md
-.env
+.env.production
+.env.development

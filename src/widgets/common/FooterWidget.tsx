@@ -1,5 +1,6 @@
 import { FaGithub } from 'react-icons/fa';
 import { MdOutlineMailOutline } from 'react-icons/md';
+import { BiCoffeeTogo } from 'react-icons/bi';
 
 const FooterWidget = () => {
   return (
@@ -16,11 +17,14 @@ const FooterWidget = () => {
         </aside>
         <nav>
           <div className="grid grid-flow-col gap-4 text-3xl">
-            <a className="" href="https://github.com/rivercity310" target="_blank">
+            <a href="https://github.com/rivercity310" target="_blank">
               <FaGithub />
             </a>
             <a href="mailto:h970126@gmail.com">
               <MdOutlineMailOutline />
+            </a>
+            <a href="https://buymeacoffee.com/rivercity310" target="_blank">
+              <BiCoffeeTogo />
             </a>
           </div>
         </nav>

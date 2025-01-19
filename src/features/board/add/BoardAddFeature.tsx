@@ -44,7 +44,7 @@ const BoardAddFeature = () => {
   };
 
   return (
-    <div className="w-[640px]">
+    <div className="w-[640px] border-2 rounded-xl py-12 px-6 shadow-uniform dark:border-dk-default dark:text-dk-text">
       <BoardAddForm
         userId={user!!.id}
         onSubmit={handleBoardAdd}
