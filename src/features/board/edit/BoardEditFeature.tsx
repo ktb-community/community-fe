@@ -8,7 +8,6 @@ import Loading from '@/shared/ui/ux/Loading.tsx';
 import { useAlertStore } from '@/shared/model/alertStore.ts';
 
 const BoardEditFeature = () => {
-  const { user } = useAuthStore();
   const { showAlert } = useAlertStore();
   const { boardId } = useParams();
   const navigate = useNavigate();
@@ -16,12 +15,11 @@ const BoardEditFeature = () => {
 
   // boardId 검증
   if (!boardId || isNaN(Number(boardId))) {
-    alert('비정상적인 접근 시도입니다.');
+    showAlert('비정상적인 접근 시도입니다.', 'error');
     navigate('/');
-    return null; // navigate 후 컴포넌트 렌더링 방지
   }
 
-  const bid = parseInt(boardId, 10);
+  const bid = parseInt(boardId!!, 10);
 
   const {
     isLoading,
@@ -34,24 +32,7 @@ const BoardEditFeature = () => {
     enabled: !!bid,
   });
 
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  if (isError) {
-    navigate('/');
-    showAlert('게시글 상세 정보를 가져오지 못했습니다.', 'error');
-    return null;
-  }
-
   const boardDetail = boardDetailData?.data as BoardDetailResponse;
-
-  // 작성자 검증
-  if (user?.id !== boardDetail.writerId) {
-    showAlert('비정상적인 접근 시도입니다.', 'warning');
-    navigate('/');
-    return null;
-  }
 
   const boardModifyMutation = useMutation({
     mutationKey: ['board_modify', bid],
@@ -72,6 +53,15 @@ const BoardEditFeature = () => {
   const handleBoardModify = (formData: FormData) => {
     boardModifyMutation.mutate({ formData, boardId: bid });
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    navigate('/');
+    showAlert('유효하지 않은 요청입니다.', 'warning');
+  }
 
   return (
     <div className="w-[640px] border-2 rounded-xl py-12 px-6 shadow-uniform dark:border-dk-default dark:text-dk-text">

@@ -8,7 +8,7 @@ interface DragAndDropProps {
   boardImg?: string | undefined;
   contentType: 'VIDEO' | 'IMAGE';
   selectedBoardImgName: string | undefined;
-  setSelectedBoardImg: (file: File) => void;
+  setSelectedBoardImg: (file: File | null) => void;
 }
 
 const DragAndDrop: FC<DragAndDropProps> = ({ boardImg, contentType, selectedBoardImgName, setSelectedBoardImg }) => {
@@ -32,20 +32,22 @@ const DragAndDrop: FC<DragAndDropProps> = ({ boardImg, contentType, selectedBoar
     };
   }, [imgPreviewUrl]);
 
-  const handleSetFilePreview = (file: File) => {
+  const handleSetFilePreview = (file: File | null) => {
     setSelectedBoardImg(file);
-    setMediaType(file.type?.startsWith('video') ? MEDIA_TYPE.VIDEO : MEDIA_TYPE.IMAGE);
-    setImgPreviewUrl(URL.createObjectURL(file));
+    setMediaType(file && file.type?.startsWith('video') ? MEDIA_TYPE.VIDEO : MEDIA_TYPE.IMAGE);
+    setImgPreviewUrl(file ? URL.createObjectURL(file) : null);
   };
 
   const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const files = e.target.files;
 
-    if (files) {
+    if (files && files.length > 0) {
       const file = files[0];
       handleSetFilePreview(file);
       setMediaType(file.type?.startsWith('video') ? MEDIA_TYPE.VIDEO : MEDIA_TYPE.IMAGE);
+    } else {
+      handleSetFilePreview(null);
     }
   };
 
@@ -77,10 +79,10 @@ const DragAndDrop: FC<DragAndDropProps> = ({ boardImg, contentType, selectedBoar
           <p>파일을 선택하거나 이곳에 드래그하세요.</p>
           <p className="break-words text-sm w-full">{selectedBoardImgName}</p>
           {imgPreviewUrl && (
-            <div>
+            <div className="mt-3">
               {mediaType === MEDIA_TYPE.IMAGE
-                ? <img src={imgPreviewUrl} className="w-fit h-fit max-h-[120px] mt-3" />
-                : <video src={imgPreviewUrl} autoPlay={true} muted />
+                ? <img src={imgPreviewUrl} className="h-[120px]" />
+                : <video src={imgPreviewUrl} autoPlay={true} muted className="w-full h-[120px]" />
               }
             </div>
           )}
