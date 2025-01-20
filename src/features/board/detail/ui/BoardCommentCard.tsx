@@ -38,7 +38,7 @@ const BoardCommentCard: FC<BoardCommentCardProps> = ({
   const handleModifyComment = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setModifyBtnClicked(false);
-    _handleModifyComment({ commentId, userId, boardId, comment: modifyComment });
+    _handleModifyComment({ commentId, boardId, comment: modifyComment });
   };
 
   const modalId = `delete-comment-modal-${boardId}-${commentId}`;
@@ -56,7 +56,7 @@ const BoardCommentCard: FC<BoardCommentCardProps> = ({
         modalId={modalId}
         modalTitle="정말로 삭제하시겠습니까?"
         modalText="삭제한 댓글은 복구할 수 없습니다."
-        onDelete={() => _handleDeleteComment({ commentId, userId, boardId })}
+        onDelete={() => _handleDeleteComment({ commentId, boardId })}
       />
 
       <div className="flex flex-col gap-3">

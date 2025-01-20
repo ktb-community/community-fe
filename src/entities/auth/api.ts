@@ -9,8 +9,8 @@ export const login = async (loginRequest: LoginRequest) => {
   else return Promise.reject(res);
 };
 
-export const logout = async () => {
-  const res = await axiosInstance.post<ApiResponse<null>>('/auth/logout');
+export const logout = async (userId: number) => {
+  const res = await axiosInstance.post<ApiResponse<null>>('/auth/logout', { userId });
   if (res.status === HttpStatusCode.Ok) return Promise.resolve(res);
   else return Promise.reject(res);
 };

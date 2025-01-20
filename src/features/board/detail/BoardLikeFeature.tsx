@@ -14,13 +14,13 @@ const BoardLikeFeature: FC<BoardLikeFeatureProps> = ({ userId, boardId }) => {
   const { showAlert } = useAlertStore();
 
   useEffect(() => {
-    checkBoardLike(boardId, userId)
+    checkBoardLike(boardId)
       .then(({ data }) => setIsLike(data));
   }, []);
 
   const mutation = useMutation({
     mutationKey: ['toggle_board_like', userId, boardId],
-    mutationFn: async () => await toggleBoardLike(boardId, userId),
+    mutationFn: async () => await toggleBoardLike(boardId),
     onSuccess: ({ data }) => {
       setIsLike(data);
       showAlert(`좋아요가 ${!isLike ? '등록' : '취소'} 되었습니다.`, 'success');

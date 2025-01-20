@@ -77,7 +77,6 @@ const BoardEditFeature = () => {
     <div className="w-[640px] border-2 rounded-xl py-12 px-6 shadow-uniform dark:border-dk-default dark:text-dk-text">
       {boardModifyMutation.isPending && <Loading />}
       <BoardEditForm
-        userId={user.id}
         boardDetail={boardDetail}
         onSubmit={handleBoardModify}
       />

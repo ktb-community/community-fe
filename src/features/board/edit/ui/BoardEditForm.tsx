@@ -9,12 +9,11 @@ import { BoardDetailResponse } from '@/entities/board/types.ts';
 import DragAndDrop from '@/shared/ui/box/DragAndDrop.tsx';
 
 interface BoardEditFormProps {
-  userId: number;
   boardDetail: BoardDetailResponse;
   onSubmit: (formData: FormData) => void;
 }
 
-const BoardEditForm: FC<BoardEditFormProps> = ({ userId, boardDetail, onSubmit }) => {
+const BoardEditForm: FC<BoardEditFormProps> = ({ boardDetail, onSubmit }) => {
   const {
     title,
     content,
@@ -29,7 +28,6 @@ const BoardEditForm: FC<BoardEditFormProps> = ({ userId, boardDetail, onSubmit }
   const handleModifyBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('userId', userId.toString());
     formData.append('title', boardTitle);
     formData.append('content', boardContent);
     if (selectedBoardImg) formData.append('boardImg', selectedBoardImg);

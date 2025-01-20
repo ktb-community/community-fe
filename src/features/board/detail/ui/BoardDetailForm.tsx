@@ -48,7 +48,7 @@ const BoardDetailForm: FC<BoardDetailFormProps> = ({ boardDetail, handleBoardDel
   };
 
   const handleBoardDelete = () => {
-    const params = { userId: user!!.id, boardId: boardId };
+    const params = { boardId };
     _handleBoardDelete(params);
   };
 

@@ -24,9 +24,3 @@ export const userEditNickname = async (userId: number, nickname: string) => {
   if (res.status === HttpStatusCode.Ok) return res.data;
   throw new Error(res.data?.message || 'Unknown error');
 };
-
-export const userEditPassword = async (userId: number, email: string, password: string) => {
-  const res = await axiosInstance.patch(`/users/${userId}/password`, { email, password });
-  if (res.status === HttpStatusCode.Ok) return res.data;
-  throw new Error(res.data?.message || 'Unknown error');
-};

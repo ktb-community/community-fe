@@ -17,7 +17,7 @@ const BoardCommentFeature: FC<BoardCommentFeatureProps> = ({ boardId, userId }) 
 
   const addCommentMutation = useMutation({
     mutationKey: ['add_comment', boardId, userId],
-    mutationFn: async () => await addBoardComment(boardId, userId, comment),
+    mutationFn: async () => await addBoardComment(boardId, comment),
     onSuccess: async () => {
       setComment('');
       showAlert('댓글이 정상적으로 추가되었습니다.', 'success');

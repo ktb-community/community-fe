@@ -3,11 +3,16 @@ export interface LoginRequest {
   password: string;
 }
 
-export interface LoginResponse {
+export interface TokenResponse {
+  accessToken: string;
+  refreshToken: string;
+}
+
+export interface LoginResponse extends TokenResponse {
   id: number;
   email: string;
   nickname: string;
-  profile: string;
+  profileImg: string;
   lastLoginDate: string;
 }
 

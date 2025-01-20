@@ -42,22 +42,20 @@ export const modifyBoard = async (boardModifyRequest: BoardModifyRequest) => {
 }
 
 export const deleteBoard = async (boardDeleteRequest: BoardDeleteRequest) => {
-  const { userId, boardId } = boardDeleteRequest;
-  const res = await axiosInstance.delete(`/boards/${boardId}`, {
-    data: { userId },
-  });
+  const { boardId } = boardDeleteRequest;
+  const res = await axiosInstance.delete(`/boards/${boardId}`);
   if (res.status === HttpStatusCode.Ok) return res.data;
   throw new Error(res.data?.message || 'Unknown error');
 };
 
-export const checkBoardLike = async (boardId: number, userId: number) => {
-  const res = await axiosInstance.get<ApiResponse<boolean>>(`/boards/${boardId}/likes/${userId}`);
+export const checkBoardLike = async (boardId: number) => {
+  const res = await axiosInstance.get<ApiResponse<boolean>>(`/boards/${boardId}/likes`);
   if (res.status === HttpStatusCode.Ok) return res.data;
   throw new Error(res.data?.message || 'Unknown error');
 };
 
-export const toggleBoardLike = async (boardId: number, userId: number) => {
-  const res = await axiosInstance.post<ApiResponse<boolean>>(`/boards/${boardId}/likes/${userId}`);
+export const toggleBoardLike = async (boardId: number) => {
+  const res = await axiosInstance.post<ApiResponse<boolean>>(`/boards/${boardId}/likes`);
   if (res.status === HttpStatusCode.Ok) return res.data;
   throw new Error(res.data?.message || 'Unknown error');
 };
@@ -74,16 +72,15 @@ export const getBoardComments = async (boardId: number, offset: number, limit: n
   throw new Error(res.data?.message || 'Unknown error');
 };
 
-export const addBoardComment = async (boardId: number, userId: number, content: string) => {
-  const res = await axiosInstance.post<ApiResponse<BoardComment>>(`/boards/${boardId}/comments`, { userId, content });
+export const addBoardComment = async (boardId: number, content: string) => {
+  const res = await axiosInstance.post<ApiResponse<BoardComment>>(`/boards/${boardId}/comments`, { content });
   if (res.status === HttpStatusCode.Created || res.status === HttpStatusCode.Ok) return res.data;
   throw new Error(res.data?.message || 'Unknown error');
 };
 
 export const modifyBoardComment = async (boardCommentModifyRequest: BoardCommentModifyRequest) => {
-  const { boardId, userId, commentId, comment } = boardCommentModifyRequest;
+  const { boardId, commentId, comment } = boardCommentModifyRequest;
   const res = await axiosInstance.patch<ApiResponse<null>>(`/boards/${boardId}/comments`, {
-    userId,
     commentId,
     comment,
   });
@@ -92,9 +89,9 @@ export const modifyBoardComment = async (boardCommentModifyRequest: BoardComment
 };
 
 export const deleteBoardComment = async (boardCommentDeleteRequest: BoardCommentDeleteRequest) => {
-  const { boardId, userId, commentId } = boardCommentDeleteRequest;
+  const { boardId, commentId } = boardCommentDeleteRequest;
   const res = await axiosInstance.delete<ApiResponse<null>>(`/boards/${boardId}/comments`, {
-    data: { userId, commentId },
+    data: { commentId },
   });
   if (res.status === HttpStatusCode.Ok) return res.data;
   throw new Error(res.data?.message || 'Unknown error');

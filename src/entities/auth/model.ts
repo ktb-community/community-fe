@@ -9,10 +9,10 @@ interface AuthState {
 }
 
 export const useAuthStore = create<AuthState>((set) => {
-  // sessionStorage에서 초기값 가져오기
+  // localStorage에서 초기값 가져오기
   const storedUser = (() => {
     try {
-      const user = sessionStorage.getItem("user");
+      const user = localStorage.getItem("user");
       return user ? (JSON.parse(user) as LoginResponse) : null;
     } catch {
       return null;
@@ -26,13 +26,13 @@ export const useAuthStore = create<AuthState>((set) => {
 
     // 로그인 성공 시 상태 업데이트 및 sessionStorage 동기화
     setAuth: (data: LoginResponse) => {
-      sessionStorage.setItem("user", JSON.stringify(data));
+      localStorage.setItem("user", JSON.stringify(data));
       set({ user: data, isAuthenticated: true });
     },
 
     // 로그아웃 시 상태 초기화 및 sessionStorage 동기화
     clearAuth: () => {
-      sessionStorage.removeItem("user");
+      localStorage.removeItem("user");
       set({ user: null, isAuthenticated: false });
     },
   };

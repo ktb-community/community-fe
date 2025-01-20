@@ -34,9 +34,8 @@ const BoardAddFeature = () => {
   });
 
   const handleBoardAdd = (boardAddRequest: BoardAddRequest) => {
-    const { userId, title, content, file } = boardAddRequest;
+    const { title, content, file } = boardAddRequest;
     const formData = new FormData();
-    formData.append('userId', userId.toString());
     formData.append('title', title);
     formData.append('content', content);
     if (file) {

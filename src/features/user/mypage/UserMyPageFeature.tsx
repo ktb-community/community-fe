@@ -112,7 +112,7 @@ const UserMyPageFeature = () => {
           <HelperText text={selectedFile ? '' : '* 프로필 사진 변경하기'} />
           <FileInputAvatar
             className="m-auto mt-3"
-            defaultImageUrl={user?.profile}
+            defaultImageUrl={user?.profileImg}
             onImageChange={handleProfileImgChange}
           />
         </div>
