@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { BoardDeleteRequest, BoardDetailResponse } from '@/entities/board/types.ts';
-import { PiEyesBold } from 'react-icons/pi';
 import { BiLike } from 'react-icons/bi';
 import { AiOutlineComment } from 'react-icons/ai';
 import UserAvatar from '@/shared/ui/avatar/UserAvatar.tsx';
@@ -13,6 +12,7 @@ import IconText from '@/shared/ui/text/IconText.tsx';
 import { changeNumberExpression } from '@/shared/utils/expression.ts';
 import MultiLineText from '@/shared/ui/text/MultiLineText.tsx';
 import { MEDIA_TYPE } from '@/shared/constants/const.ts';
+import { LuEye } from 'react-icons/lu';
 
 interface BoardDetailFormProps {
   boardDetail: BoardDetailResponse,
@@ -80,7 +80,7 @@ const BoardDetailForm: FC<BoardDetailFormProps> = ({ boardDetail, handleBoardDel
         </div>
 
         <div className="text-[14px] flex flex-row gap-3 text-gray-400">
-          <IconText Icon={<PiEyesBold />} value={changeNumberExpression(viewCnt)} />
+          <IconText Icon={<LuEye />} value={changeNumberExpression(viewCnt)} />
           <IconText Icon={<BiLike />} value={changeNumberExpression(likeCnt)} />
           <IconText Icon={<AiOutlineComment />} value={changeNumberExpression(commentCnt)} />
         </div>

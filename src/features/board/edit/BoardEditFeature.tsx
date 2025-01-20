@@ -1,6 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useAuthStore } from '@/entities/auth/model.ts';
 import { getBoard, modifyBoard } from '@/entities/board/api.ts';
 import { BoardDetailResponse, BoardModifyRequest } from '@/entities/board/types.ts';
 import BoardEditForm from '@/features/board/edit/ui/BoardEditForm.tsx';

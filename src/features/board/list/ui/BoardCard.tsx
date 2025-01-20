@@ -4,9 +4,9 @@ import { ENV } from '@/shared/config/env.ts';
 import { useNavigate } from 'react-router-dom';
 import { BiLike } from 'react-icons/bi';
 import { AiOutlineComment } from 'react-icons/ai';
-import { PiEyesBold } from 'react-icons/pi';
 import { changeNumberExpression } from '@/shared/utils/expression.ts';
 import IconText from '@/shared/ui/text/IconText.tsx';
+import { LuEye } from 'react-icons/lu';
 
 interface BoardCardProps {
   board: Board;
@@ -32,7 +32,7 @@ const BoardCard: FC<BoardCardProps> = ({ board }) => {
 
         <div className="flex flex-row justify-between items-center">
           <div className="text-[12px] flex flex-row gap-2 items-center justify-center text-gray-400">
-            <IconText Icon={<PiEyesBold />} value={changeNumberExpression(viewCnt)} />
+            <IconText Icon={<LuEye />} value={changeNumberExpression(viewCnt)} />
             <IconText Icon={<BiLike />} value={changeNumberExpression(likeCnt)} />
             <IconText Icon={<AiOutlineComment />} value={changeNumberExpression(commentCnt)} />
           </div>
