@@ -11,11 +11,13 @@ import NotFoundPage from '@/pages/NotFoundPage.tsx';
 import UserPasswordPage from '@/pages/UserPasswordPage.tsx';
 import Alert from '@/shared/ui/ux/Alert.tsx';
 import UserMyPage from '@/pages/UserMyPage.tsx';
+import MetaTags from '@/widgets/common/PageMetaTags.tsx';
 
 const App = () => {
   return (
     <BrowserRouter>
       <Alert />
+      <MetaTags />
       <Routes>
         {/* 로그인 페이지 진입시 이미 인증이 되어있다면 홈으로 바로 이동 */}
         <Route element={<RedirectIfAuthenticated to="/" />}>

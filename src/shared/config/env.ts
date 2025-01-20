@@ -3,4 +3,5 @@ export const ENV = Object.freeze({
   API_URL: import.meta.env.VITE_API_URL,
   STORAGE_URL: import.meta.env.VITE_STORAGE_URL,
   LOGO_TEXT: import.meta.env.VITE_LOGO_TEXT,
+  SITE_DESCRIPTION: import.meta.env.VITE_SITE_DESCRIPTION,
 });
