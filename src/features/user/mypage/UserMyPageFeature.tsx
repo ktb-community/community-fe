@@ -76,26 +76,25 @@ const UserMyPageFeature = () => {
     const userId = user!!.id;
 
     try {
+      if (user!!.nickname !== nickname) {
+        await userNicknameMutation.mutateAsync({ userId, nickname });
+      }
+
       if (selectedFile) {
         const formData = new FormData();
         formData.append('profileImg', selectedFile);
         await userProfileMutation.mutateAsync({ userId, formData });
       }
 
-      if (user!!.nickname !== nickname) {
-        userNicknameMutation.mutate({ userId, nickname });
-        await userNicknameMutation.mutateAsync({ userId, nickname });
-      }
-
       // 변경된 정보로 업데이트
       const res = await getUser(userId);
 
       if (res.status === ResponseText.SUCCESS) {
-        const user = res.data;
-        setAuth(user);
+        setAuth({ ...user, ...res.data });
         showAlert('변경 사항이 모두 성공적으로 저장되었습니다.', 'success');
         navigate('/');
       }
+
     } catch (error) {
       console.error('변경 중 오류 발생:', error);
     } finally {

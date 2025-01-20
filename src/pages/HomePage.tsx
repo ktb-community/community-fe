@@ -12,7 +12,7 @@ const HomePage = () => {
   return (
     <div
       className={`bg-gray-100 dark:bg-dk-default dark:text-dk-text text-black overflow-hidden min-w-screen flex flex-col ${isAuthenticated ? '' : 'overflow-y-hidden'}`}>
-      <div className={`flex flex-col flex-grow gap-16 ${isAuthenticated ? '' : 'blur-[2px] pointer-events-none'}`}>
+      <div className={`flex flex-col min-h-screen flex-grow gap-16 mb-32 ${isAuthenticated ? '' : 'blur-[2px] pointer-events-none'}`}>
         <HeaderWidget />
         <BoardListWidget />
       </div>
